@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from './employees/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent {
 
   constructor(iconRegistry: MatIconRegistry, 
     sanitizer: DomSanitizer, 
+    public authService: AuthService,
     private route: ActivatedRoute,
     private router: Router) {
     iconRegistry.addSvgIcon('scheduler', 

@@ -19,6 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -33,6 +34,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSnackBarModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatTabsModule,
     MatSidenavModule,
     MatSelectModule,
@@ -54,6 +56,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSnackBarModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatTabsModule,
     MatSidenavModule,
     MatSelectModule,
