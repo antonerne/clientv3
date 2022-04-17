@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser'
+import { MatIconRegistry } from '@angular/material/icon'
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'clientv3';
+  title = 'Osan Scheduler';
+
+  constructor(iconRegistry: MatIconRegistry, 
+    sanitizer: DomSanitizer, 
+    private route: ActivatedRoute,
+    private router: Router) {
+    iconRegistry.addSvgIcon('scheduler', 
+    sanitizer.bypassSecurityTrustResourceUrl('assets/images/icons/calendar.svg'));
+    this.router.navigate(['/home']);
+  }
 }
