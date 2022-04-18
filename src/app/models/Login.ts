@@ -8,3 +8,7 @@ export interface LoginResponse {
     mustchange: boolean;
     token: string;
 }
+
+export interface Message {
+    message: string;
+}

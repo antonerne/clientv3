@@ -1,0 +1,6 @@
+{
+    "/api/v2/Employees/*": {
+        "target": "http://localhost:6000",
+        "secure": false
+    }
+}

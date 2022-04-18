@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CacheService } from '../services/cache-service';
 import jwt_decode from 'jwt-decode';
-import { map } from 'rxjs/operators'
+import { map, tap } from 'rxjs/operators'
 import { Employee, Site } from 'tsched-models';
-import { LoginResponse } from '../models/Login';
+import { LoginResponse, Message } from '../models/Login';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,16 @@ export class AuthService extends CacheService {
   mustChange = false;
   showProgress = false;
   statusMessage = "footer";
+  currentEmail = '';
 
   constructor(private http: HttpClient, private router: Router) {
     super();
+    this.getToken();
   }
 
   getToken(): string | null {
+    var token = this.getItem('jwt');
+    this.isAuthenticated = (token) ? true : false;
     return this.getItem('jwt');
   }
 
@@ -61,7 +65,8 @@ export class AuthService extends CacheService {
   }
 
   login(email: string, password: string) {
-    return this.http.post<LoginResponse>('api/v2/Employees/authenticate', 
+    var address = '/api/v2/Employees/authenticate';
+    return this.http.post<LoginResponse>(address, 
       {"email": email, "password":password})
       .pipe(map(resp => {
         this.setItem('jwt', resp.token);
@@ -71,6 +76,7 @@ export class AuthService extends CacheService {
         this.setItem('site', resp.site);
         this.setItem('user', resp.user);
         this.mustChange = resp.user.creds.must_change;
+        this.showProgress = false;
       }));
   }
 
@@ -78,6 +84,12 @@ export class AuthService extends CacheService {
     this.clearToken();
     this.isAuthenticated = false;
     this.mustChange = false;
+  }
+
+  verify(email: string, passcode: string) {
+    var address = '/api/v2/Employees/verify';
+    return this.http.put<Message>(address, 
+      {"email": email, "verifytoken":passcode});
   }
 }
 

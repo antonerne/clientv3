@@ -8,6 +8,7 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { EmployeesModule } from './employees/employees.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { EmployeesModule } from './employees/employees.module';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    EmployeesModule
+    EmployeesModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -19,6 +19,15 @@ export class AppComponent {
     private router: Router) {
     iconRegistry.addSvgIcon('scheduler', 
     sanitizer.bypassSecurityTrustResourceUrl('assets/images/icons/calendar.svg'));
-    this.router.navigate(['/home']);
+    var token = authService.getToken();
+    if (!token || token == "") {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/home']);
+    }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

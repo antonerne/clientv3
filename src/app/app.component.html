@@ -2,8 +2,8 @@
   <mat-icon svgIcon="scheduler"></mat-icon>
   <a mat-button><h1>Osan Scheduler</h1></a>
   <span class="flex-spacer"></span>
-  <a mat-button *ngIf="authService.isAuthenticated">Log Out</a>
-  <a mat-button *ngIf="!authService.isAuthenticated">Log In</a>
+  <a mat-button *ngIf="authService.isAuthenticated" (click)="logout">Log Out</a>
+  <a mat-button *ngIf="!authService.isAuthenticated" routerLink="/login">Log In</a>
   <a mat-icon-button routerLink="/help"><mat-icon>help</mat-icon></a>
 </mat-toolbar>
 <mat-sidenav-container class="main-context">
