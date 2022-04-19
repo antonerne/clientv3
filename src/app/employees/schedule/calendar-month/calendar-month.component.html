@@ -1,0 +1,25 @@
+<div fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex="730px">
+        <mat-card-content>
+            <table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="movement" (click)="subMonth()">&lt;</td>
+                                <td colspan="5" class="month">
+                                    {{months[baseDate.getMonth()]}} {{baseDate.getFullYear()}}
+                                </td>
+                                <td class="movement" (click)="addMonth()">&gt;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr *ngFor="let week of this.weeks">
+                    <app-calendar-week [dates]="week" 
+                        [baseDate]="this.baseDate"></app-calendar-week>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div> 

@@ -18,7 +18,7 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    width: 200px;
+    width: 150px;
     background: #7b1fa2
 }
 
@@ -42,4 +42,14 @@
 
 .progress-bar {
     width: 100px;
+}
+
+.menu-buttons {
+    width: 95%!important;
+    min-width: unset!important;
+    height: 20px!important;
+    min-height: unset!important;
+    line-height: 12px!important;
+    padding: 0px!important;
+    margin: 2px!important;
 }

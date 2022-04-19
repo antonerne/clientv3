@@ -10,9 +10,11 @@
   <mat-sidenav #sidenav mode="side" opened class="sidenav"
   [fixedInViewport]="true" [fixedBottomGap]="30" [fixedTopGap]="50">
     <ng-container *ngFor="let head of this.menuService.MenuList">
-      <button mat-flat-button color="Primary">{{head.title}}</button>
+      <button mat-flat-button color="Primary" class="menu-buttons"
+        style="cursor:default">{{head.title}}</button>
       <ng-container *ngFor="let item of head.menus">
-        <button mat-raised-button color="accent" [routerLink]="item.link">
+        <button mat-raised-button color="accent" class="menu-buttons" 
+          [routerLink]="item.link">
           {{item.title}}
         </button>
       </ng-container>

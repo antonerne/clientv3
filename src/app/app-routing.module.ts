@@ -4,11 +4,12 @@ import { ForgotComponent } from './auth/forgot/forgot.component';
 import { LoginComponent } from './auth/login/login.component';
 import { MustchangeComponent } from './auth/mustchange/mustchange.component';
 import { VerifyComponent } from './auth/verify/verify.component';
+import { CalendarMonthComponent } from './employees/schedule/calendar-month/calendar-month.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent},
+  { path: 'home', component: CalendarMonthComponent},
   { path: 'login', component: LoginComponent},
   { path: 'verify', component: VerifyComponent},
   { path: 'forgot', component: ForgotComponent},

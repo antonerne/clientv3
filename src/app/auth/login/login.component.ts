@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuServiceService } from 'src/app/services/menu-service.service';
+import { MenuService } from 'src/app/services/menu-service.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private menuService: MenuServiceService
+    private menuService: MenuService
   ) {
     this.loginForm = this.formBuilder.group({
       email: this.email,

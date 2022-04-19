@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { CacheService } from '../services/cache-service';
 import jwt_decode from 'jwt-decode';
 import { map, tap } from 'rxjs/operators'
-import { Employee, Site } from 'tsched-models';
-import { LoginResponse, Message, NewEmployeeResponse } from '../models/Login';
+import { LoginResponse, Message, NewEmployeeResponse } from '../models/utilities/Login';
+import { Team } from '../models/team/team';
+import { Site } from '../models/site/site';
+import { Employee } from '../models/employee/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -31,17 +33,12 @@ export class AuthService extends CacheService {
   clearToken() {
     this.removeItem('jwt');
     this.removeItem('team');
-    this.removeItem('teamid');
     this.removeItem('site');
     this.removeItem('user');
   }
 
-  getTeam(): string | null {
+  getTeam(): Team | null {
     return this.getItem('team');
-  }
-
-  getTeamID(): string | null {
-    return this.getItem('teamid');
   }
 
   getSite(): Site | null {
@@ -72,7 +69,6 @@ export class AuthService extends CacheService {
         this.setItem('jwt', resp.token);
         this.isAuthenticated = true;
         this.setItem('team', resp.team);
-        this.setItem('teamid', resp.teamid);
         this.setItem('site', resp.site);
         this.setItem('user', resp.user);
         this.mustChange = resp.user.creds.must_change;
@@ -105,7 +101,6 @@ export class AuthService extends CacheService {
         this.setItem('jwt', resp.token);
         this.isAuthenticated = true;
         this.setItem('team', resp.team);
-        this.setItem('teamid', resp.teamid);
         this.setItem('site', resp.site);
         this.setItem('user', resp.user);
         this.mustChange = resp.user.creds.must_change;
@@ -118,7 +113,7 @@ export class AuthService extends CacheService {
     var user = this.getItem<Employee>('user');
     if (user) {
       return this.http.put<NewEmployeeResponse>(address, 
-        {"id": user._id, "field": "password", "subfield": "", "value": password})
+        {"id": user.id, "field": "password", "subfield": "", "value": password})
         .pipe(map(resp => {
           this.setItem('user', resp.employee);
           this.mustChange = resp.employee.creds.must_change;

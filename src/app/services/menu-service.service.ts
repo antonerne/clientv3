@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HeaderItem, MenuItem, Menus } from '../models/Menus';
+import { HeaderItem, MenuItem, Menus } from '../models/utilities/Menus';
 import * as list from './menus.json';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MenuServiceService {
+export class MenuService {
   roles: string[] = [];
+  public BaseMenuList: HeaderItem[] = [];
   public MenuList: HeaderItem[] = [];
 
   constructor() {
     var dlist = (list as any)
     if (dlist.menus) {
       dlist.menus.forEach( (h: HeaderItem) => {
-        this.MenuList.push(h);
+        this.BaseMenuList.push(new HeaderItem(h));
       })
     }
    }
@@ -22,7 +23,7 @@ export class MenuServiceService {
    {
      var answer: HeaderItem[] = []
      roles.forEach(role => {
-        this.MenuList.forEach(head => {
+        this.BaseMenuList.forEach(head => {
           if (head.hasRole(role)) {
             var found = false;
             for (let i=0; i < answer.length && !found; i++) {
@@ -36,14 +37,18 @@ export class MenuServiceService {
                     }
                   });
                   if (!mifound) {
-                    answer[i].menus.push(new MenuItem(mi.title, mi.link));
+                    var mitem = new MenuItem();
+                    mitem.title = mi.title;
+                    mitem.link = mi.link;
+                    answer[i].menus.push(mitem);
                   }
                 })
                 found = true
               }
             }
             if (!found) {
-              var item = new HeaderItem(head.title);
+              var item = new HeaderItem();
+              item.title = head.title;
               var menuitems = head.getMenuItemsForRole(role);
               item.menus.push(...menuitems);
               answer.push(item);
@@ -52,5 +57,9 @@ export class MenuServiceService {
         });
      });
      this.MenuList = answer;
+   }
+
+   clearMenus() {
+     this.MenuList = [];
    }
 }

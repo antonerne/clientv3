@@ -1,0 +1,51 @@
+table.day {
+    margin: 0;
+    padding: 0;
+    border: 2px solid black;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+
+td.code {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 24pt;
+    font-weight: bold;
+    vertical-align: bottom;
+}
+
+td.workcenter {
+    margin: 0;
+    padding: 0;
+    height: 25px;
+    text-align: center;
+    font-size: 12pt;
+    font-weight: bold;
+    vertical-align: bottom;
+}
+
+td.date {
+    height: 25px;
+    width: 35px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+td.today {
+    height: 25px;
+    width: 35px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    background-color: darkred;
+    font-size: 16pt;
+    font-weight: bold;
+}

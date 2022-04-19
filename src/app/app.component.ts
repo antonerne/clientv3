@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
-import { MenuServiceService } from './services/menu-service.service';
+import { MenuService } from './services/menu-service.service';
 
 @Component({
   selector: 'app-root',
@@ -18,19 +18,26 @@ export class AppComponent {
     public authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    public menuService: MenuServiceService) {
+    public menuService: MenuService) {
     iconRegistry.addSvgIcon('scheduler', 
     sanitizer.bypassSecurityTrustResourceUrl('assets/images/icons/calendar.svg'));
     var token = authService.getToken();
     if (!token || token == "") {
       this.router.navigate(['/login']);
     } else {
+      var user = this.authService.getUser();
+      if (user) {
+        this.menuService.getMenus(user.roles);
+      } else {
+        this.menuService.clearMenus();
+      }
       this.router.navigate(['/home']);
     }
   }
 
   logout() {
     this.authService.logout();
+    this.menuService.clearMenus();
     this.router.navigate(['/login']);
   }
 }

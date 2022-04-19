@@ -4,6 +4,7 @@ import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ScheduleModule } from './schedule/schedule.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ScheduleModule
   ]
 })
 export class EmployeesModule { }
