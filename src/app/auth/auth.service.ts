@@ -5,7 +5,7 @@ import { CacheService } from '../services/cache-service';
 import jwt_decode from 'jwt-decode';
 import { map, tap } from 'rxjs/operators'
 import { Employee, Site } from 'tsched-models';
-import { LoginResponse, Message } from '../models/Login';
+import { LoginResponse, Message, NewEmployeeResponse } from '../models/Login';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthService extends CacheService {
   isAuthenticated = false;
   mustChange = false;
   showProgress = false;
-  statusMessage = "footer";
+  statusMessage = "Welcome";
   currentEmail = '';
 
   constructor(private http: HttpClient, private router: Router) {
@@ -90,6 +90,42 @@ export class AuthService extends CacheService {
     var address = '/api/v2/Employees/verify';
     return this.http.put<Message>(address, 
       {"email": email, "verifytoken":passcode});
+  }
+
+  sendForgot(email: string) {
+    var address = '/api/v2/Employees/forgot/' + email;
+    return this.http.get<Message>(address);
+  }
+
+  forgot(email: string, newpassword: string, resetToken: string) {
+    var address = '/api/v2/Employees/forgot';
+    return this.http.post<LoginResponse>(address, 
+      {"email": email, "password":newpassword, "token": resetToken})
+      .pipe(map(resp => {
+        this.setItem('jwt', resp.token);
+        this.isAuthenticated = true;
+        this.setItem('team', resp.team);
+        this.setItem('teamid', resp.teamid);
+        this.setItem('site', resp.site);
+        this.setItem('user', resp.user);
+        this.mustChange = resp.user.creds.must_change;
+        this.showProgress = false;
+      }));
+  }
+
+  changePassword(password: string) {
+    var address = '/api/v2/Employees';
+    var user = this.getItem<Employee>('user');
+    if (user) {
+      return this.http.put<NewEmployeeResponse>(address, 
+        {"id": user._id, "field": "password", "subfield": "", "value": password})
+        .pipe(map(resp => {
+          this.setItem('user', resp.employee);
+          this.mustChange = resp.employee.creds.must_change;
+          this.currentEmail = resp.employee.email;
+        }));
+    }
+    return null;
   }
 }
 

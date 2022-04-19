@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from './employees/auth.service';
+import { AuthService } from './auth/auth.service';
+import { MenuServiceService } from './services/menu-service.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
     sanitizer: DomSanitizer, 
     public authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private menuService: MenuServiceService) {
     iconRegistry.addSvgIcon('scheduler', 
     sanitizer.bypassSecurityTrustResourceUrl('assets/images/icons/calendar.svg'));
     var token = authService.getToken();
@@ -29,5 +31,6 @@ export class AppComponent {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

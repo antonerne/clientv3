@@ -1,0 +1,7 @@
+{
+    "menus": [
+        {"title": "Employee", "menus": [
+            {"title": "Schedule", "link": "/home", "roles": [ "employee"]}
+        ]}
+    ]
+}

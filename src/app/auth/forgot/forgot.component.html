@@ -1,0 +1,78 @@
+<div fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex="450px">
+        <mat-card-header>
+            <mat-card-title>
+                <div class="mat-headline">Password Reset Form</div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="forgotForm" fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <mat-icon>email</mat-icon>
+                    <mat-form-field  style="width:325px;">
+                        <input matInput placeholder="E-Mail" aria-label="E-Mail"
+                            [formControl]="email">
+                        <mat-error *ngIf="email.hasError('required')">
+                            E-Mail is required
+                        </mat-error>
+                        <mat-error *ngIf="email.hasError('email')">
+                            E-Mail is not valid
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <mat-icon matPrefix>vpn_key</mat-icon>
+                    <mat-form-field style="width:325px;">
+                        <input matInput placeholder="New Password" aria-label="New Password"
+                            type="password" [formControl]="newpassword" fxFlex>
+                        <mat-hint>Mininum 10/Maximum 30 characters</mat-hint>
+                        <mat-error *ngIf="newpassword.hasError('required')">
+                            Verification Code is required
+                        </mat-error>
+                        <mat-error *ngIf="newpassword.hasError('minlength')">
+                            Password must be at least 10 characters
+                        </mat-error>
+                        <mat-error *ngIf="newpassword.hasError('maxlength')">
+                            Password must be no more than 30 characters
+                        </mat-error>
+                        <mat-error *ngIf="newpassword.hasError('twoofeach')">
+                            Password must have two of each type of character (Upper/Lower Case, Numbers, Special)
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <mat-icon matPrefix>vpn_key</mat-icon>
+                    <mat-form-field style="width:325px;">
+                        <input matInput placeholder="Verify New Password" aria-label="Verify New Password"
+                            type="password" [formControl]="verify" fxFlex>
+                        <mat-hint>Must be the same </mat-hint>
+                        <mat-error *ngIf="verify.hasError('required')">
+                            Password must be typed in a second time
+                        </mat-error>
+                        <mat-error *ngIf="verify.hasError('matching')">
+                            Passwords must match
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <mat-icon matPrefix>code</mat-icon>
+                    <mat-form-field style="width:325px;">
+                        <input matInput placeholder="Code String From Email" 
+                        aria-label="Code String From Email"
+                            type="password" [formControl]="passcode" fxFlex>
+                        <mat-hint>Must be the same </mat-hint>
+                        <mat-error *ngIf="passcode.hasError('required')">
+                            Reset Password Code is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" class="margin-top">
+                    <div *ngIf="forgotError" class="mat-caption error">{{forgotError}}</div>
+                    <div class="flex-spacer"></div>
+                    <button mat-raised-button type="submit" color="primary"
+                        [disabled]="forgotForm.invalid" (click)="forgot()">Set Password</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -12,3 +12,7 @@ export interface LoginResponse {
 export interface Message {
     message: string;
 }
+
+export interface NewEmployeeResponse {
+    employee: Employee
+}
