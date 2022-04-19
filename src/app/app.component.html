@@ -8,7 +8,16 @@
 </mat-toolbar>
 <mat-sidenav-container class="main-context">
   <mat-sidenav #sidenav mode="side" opened class="sidenav"
-  [fixedInViewport]="true" [fixedBottomGap]="30" [fixedTopGap]="50">Side</mat-sidenav>
+  [fixedInViewport]="true" [fixedBottomGap]="30" [fixedTopGap]="50">
+    <ng-container *ngFor="let head of this.menuService.MenuList">
+      <button mat-flat-button color="Primary">{{head.title}}</button>
+      <ng-container *ngFor="let item of head.menus">
+        <button mat-raised-button color="accent" [routerLink]="item.link">
+          {{item.title}}
+        </button>
+      </ng-container>
+    </ng-container>
+  </mat-sidenav>
   <mat-sidenav-content style="overflow: visible;">
     <router-outlet></router-outlet>
   </mat-sidenav-content>

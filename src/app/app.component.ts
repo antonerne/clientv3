@@ -18,7 +18,7 @@ export class AppComponent {
     public authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private menuService: MenuServiceService) {
+    public menuService: MenuServiceService) {
     iconRegistry.addSvgIcon('scheduler', 
     sanitizer.bypassSecurityTrustResourceUrl('assets/images/icons/calendar.svg'));
     var token = authService.getToken();

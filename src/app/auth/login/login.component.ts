@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MenuServiceService } from 'src/app/services/menu-service.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private menuService: MenuServiceService
   ) {
     this.loginForm = this.formBuilder.group({
       email: this.email,
@@ -46,6 +48,10 @@ export class LoginComponent implements OnInit {
         next: (data) => {
           this.authService.showProgress = false;
           this.authService.statusMessage = "Logged In";
+          var user = this.authService.getUser();
+          if (user) {
+            this.menuService.getMenus(user.roles);
+          }
           if (this.authService.mustChange) {
             this.router.navigate(["/mustchange"]);
           } else {
