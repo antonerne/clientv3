@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           if (this.authService.mustChange) {
             this.router.navigate(["/mustchange"]);
           } else {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/employee/home']);
           }
         },
         error: (error) => {

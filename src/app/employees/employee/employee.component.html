@@ -1,0 +1,10 @@
+<div fxLayout="column" fxLayoutAlign="start" fxFill>
+    <div fxLayout="row" fxLayoutAlign="start" fxFill class="employee">
+        <span>{{employee.name.fullName()}}</span>
+        <span class="flex-spacer"></span>
+        <span>{{employee.email}}</span>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

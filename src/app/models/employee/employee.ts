@@ -14,6 +14,7 @@ import { WorkDay } from './assignments/workday';
 import { Team } from "../team/team";
 import { WorkCode } from "../site/workcode";
 import { IVariation, Variation } from './assignments/variation';
+import { ObjectId } from 'mongodb';
 
 export interface IEmployee {
     id: string;
@@ -37,7 +38,7 @@ export interface IEmployee {
 }
 
 export class Employee implements IEmployee, IComparable<Employee> {
-    public id: string = "";
+    public id: string;
     public email: string;
     public teamID: string;
     public assignments: Assignment[] = [];

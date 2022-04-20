@@ -6,19 +6,21 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ScheduleModule } from './schedule/schedule.module';
 import { ProfileComponent } from './profile/profile.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
+import { EmployeeComponent } from './employee/employee.component';
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
+    EmployeeComponent
   ],
   imports: [
     CommonModule,
-    EmployeesRoutingModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    ScheduleModule
+    ScheduleModule,
+    EmployeesRoutingModule
   ]
 })
 export class EmployeesModule { }
