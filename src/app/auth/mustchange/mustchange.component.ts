@@ -54,7 +54,6 @@ export class MustchangeComponent implements OnInit {
           this.router.navigate(['/employee/home']);
         },
         error: (error) => {
-          console.log(error);
           this.authService.showProgress = false;
           this.authService.statusMessage = '';
           if (error.error.error) {
