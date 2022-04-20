@@ -1,0 +1,147 @@
+<div fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex="670px">
+        <mat-card-header>
+            <mat-card-title>
+                <div class="mat-headline">Current Employee Profile Information</div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="profileForm" fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <label>Name:</label>
+                    <mat-form-field  style="width:125px;">
+                        <input matInput placeholder="First Name" aria-label="First Name"
+                            formControlName="firstname" (blur)="changeForm('firstname')">
+                        <mat-error *ngIf="profileForm.get('firstname')?.hasError('required')">
+                            First Name is required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field  style="width:75px;margin-left:20px;">
+                        <input matInput placeholder="Middle Name" aria-label="Middle Name"
+                            formControlName="middlename" (blur)="changeForm('middlename')">
+                    </mat-form-field>
+                    <mat-form-field  style="width:125px;margin-left:20px;">
+                        <input matInput placeholder="Last Name" aria-label="Last Name"
+                            formControlName="lastname" (blur)="changeForm('lastname')">
+                        <mat-error *ngIf="profileForm.get('lastname')?.hasError('required')">
+                            Last Name is required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field  style="width:75px;margin-left:20px;">
+                        <input matInput placeholder="Name Suffix" aria-label="Name Suffix"
+                            formControlName="namesuffix" (blur)="changeForm('namesuffix')">
+                    </mat-form-field>
+                    <mat-form-field  style="width:75px;margin-left:20px;">
+                        <input matInput placeholder="Nickname" aria-label="Nickname"
+                            formControlName="nickname" (blur)="changeForm('nickname')">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <label>Primary Email (Login):</label>
+                    <mat-form-field style="width:400px">
+                        <input matInput placeholder="Primary Email" aria-label="Primary Email"
+                            formControlName="email" (blur)="changeForm('primaryemail')">
+                        <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+                            Primary Email is required
+                        </mat-error>
+                        <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
+                            Primary Email is not in valid format (name@server)!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <label>Employee Company Information</label>
+                    <label>Company</label>
+                    <mat-form-field style="width:200px;text-align:center;">
+                        <mat-select formControlName="company" (change)="changeForm('company')">
+                            <ng-container *ngIf="team">
+                                <mat-option *ngFor="let com of team.companies"
+                                    [value]="com.code">{{com.title}}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <label>Company IDs:</label>
+                    <mat-form-field  style="width:125px;text-align:center;">
+                        <input matInput placeholder="Employee ID" aria-label="Employee ID"
+                            formControlName="employeeid" (blur)="changeForm('employeeid')">
+                        <mat-error *ngIf="profileForm.get('employeeid')?.hasError('required')">
+                            Company Employee ID is required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field  style="width:125px;margin-left:20px;text-align:center;">
+                        <input matInput placeholder="Alternate ID" aria-label="Alternate ID"
+                            formControlName="alternateid" (blur)="changeForm('alternateid')">
+                    </mat-form-field>
+                    <label>Rank/Grade</label>
+                    <mat-form-field  style="width:100px;margin-left:20px;text-align:center;">
+                        <input matInput placeholder="Rank" aria-label="Rank"
+                            formControlName="rank" (blur)="changeForm('rank')">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <label>Division/Section:</label>
+                    <mat-form-field  style="width:150px;text-align:center;">
+                        <input matInput placeholder="Division" aria-label="Division"
+                            formControlName="division" (blur)="changeForm('division')">
+                    </mat-form-field>
+                    <label>Cost Center:</label>
+                    <mat-form-field  style="width:150px;margin-left:20px;text-align:center;">
+                        <input matInput placeholder="Cost Center" aria-label="Cost Center"
+                            formControlName="costcenter" (blur)="changeForm('costcenter')">
+                    </mat-form-field>
+                </div>
+            </form>
+            <form [formGroup]="changePasswordForm" fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="center center" 
+                    fxLayoutGap="20px" *ngIf="!this.showPasswordChange">
+                    <button mat-raised-button color="primary"
+                        (click)="showPassword()">Change Password</button>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center" 
+                    fxLayoutGap="20px" *ngIf="this.showPasswordChange">
+                    <label>New Password:</label>
+                    <mat-form-field style="width:200px;margin-left:20px">
+                        <input matInput type="password" placeholder="New Password"
+                        aria-label="New Password" formControlName="newpassword"
+                        autocomplete="off">
+                        <mat-hint>Mininum 10/Maximum 30 characters</mat-hint>
+                        <mat-error *ngIf="newpassword.hasError('required')">
+                            Password is required
+                        </mat-error>
+                        <mat-error *ngIf="newpassword.hasError('minlength')">
+                            Password must be at least 10 characters
+                        </mat-error>
+                        <mat-error *ngIf="newpassword.hasError('maxlength')">
+                            Password must be no more than 30 characters
+                        </mat-error>
+                        <mat-error *ngIf="newpassword.hasError('twoofeach')">
+                            Password must have two of each type of character (Upper/Lower Case, Numbers, Special)
+                        </mat-error>
+                    </mat-form-field>
+                    <label>Verify:</label>
+                    <mat-form-field style="width:200px;margin-left:20px">
+                        <input matInput type="password" placeholder="Verify Password"
+                        aria-label="Verify Password" formControlName="verify"
+                        autocomplete="off">
+                        <mat-error *ngIf="verify.hasError('required')">
+                            Password is required
+                        </mat-error>
+                        <mat-error *ngIf="verify.hasError('matching')">
+                            Passwords must match
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center" 
+                    fxLayoutGap="20px" *ngIf="this.showPasswordChange">
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="changePasswordForm.invalid"
+                        (click)="submitPassword()">Change Password</button>
+                    <button mat-raised-button color="accent" 
+                        (click)="cancelPasswordChange()">Cancel</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

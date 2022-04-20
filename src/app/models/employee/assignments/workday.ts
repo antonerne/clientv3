@@ -5,7 +5,7 @@ export interface IWorkday {
     day: number;
     work_center?: string;
     start_hour: number;
-    work_code: string;
+    code: string;
     hours_worked: number;
     is_leave?: boolean;
 }
@@ -14,7 +14,7 @@ export class WorkDay implements IWorkday, IComparable<IWorkday> {
     public day: number;
     public work_center?: string | undefined;
     public start_hour: number;
-    public work_code: string;
+    public code: string;
     public hours_worked: number;
     public is_leave?: boolean;
 
@@ -23,7 +23,7 @@ export class WorkDay implements IWorkday, IComparable<IWorkday> {
         this.work_center = (other && other.work_center) 
             ? other.work_center : undefined;
         this.start_hour = (other) ? other.start_hour : -1;
-        this.work_code = (other) ? other.work_code : "";
+        this.code = (other) ? other.code : "";
         this.hours_worked = (other) ? other.hours_worked : 0;
         this.is_leave = (other && other.is_leave) ? other.is_leave : false;
     }

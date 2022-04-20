@@ -202,7 +202,6 @@ export class Employee implements IEmployee, IComparable<Employee> {
     // reference to leaves
     getWorkday(start: Date, site: string, useLeaves: boolean = true): WorkDay {
         let workday: WorkDay | undefined;
-        
         if (this.assignments) {
             this.assignments.sort((a,b) => a.compareTo(b));
             for (let asgmt of this.assignments) {
@@ -230,21 +229,19 @@ export class Employee implements IEmployee, IComparable<Employee> {
         if (useLeaves) {
             if (this.leaves) {
                 this.leaves.sort((a,b) => a.compareTo(b));
-                for (let lv of this.leaves) {
-                    if (lv.leave_date === start 
-                        && (lv.status === Statuses.APPROVED 
-                            || lv.status === Statuses.ACTUAL)) {
+                this.leaves.forEach(lv => {
+                    if (lv.dateEqual(start)) {
                         if (!workday) {
                             workday = new WorkDay();
                         }
                         workday.day = start.getDay();
-                        workday.work_code = lv.code;
+                        workday.code = lv.code;
                         workday.hours_worked = lv.hours;
                         workday.work_center = undefined;
                         workday.start_hour = 0;
                         workday.is_leave = true;
                     }
-                }
+                });
             }
         }
         if (!workday) {

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
-import { IEmployee, Employee } from '../models/employee/employee';
+import { Employee } from 'src/app/models/employee/employee';
 
 @Component({
   selector: 'app-calendar-day',
@@ -26,6 +26,7 @@ export class CalendarDayComponent implements OnInit {
   }
   @Input() set baseDate(value: Date) {
     this._baseDate = value;
+    this.setWorkCode();
   }
   get baseDate(): Date {
     return this._baseDate;
@@ -64,7 +65,7 @@ export class CalendarDayComponent implements OnInit {
     let site = this.authService.getSite();
     if (user && team && site) {
       let workday = user.getWorkday(this.day, site.code, true);
-      this.workcode = workday.work_code;
+      this.workcode = workday.code;
       this.workcenter = (workday.work_center) ? workday.work_center : "";
       team.displayCodes?.forEach(dc => {
         if (dc.code === this.workcode 

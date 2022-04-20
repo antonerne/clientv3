@@ -7,15 +7,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
-import { EmployeesModule } from './employees/employees.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthHttpInterceptor } from './utilities/auth-http-interceptor';
 import { AuthModule } from './auth/auth.module';
+import { EmployeesModule } from './employees/employees.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

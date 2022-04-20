@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center">
-    <mat-card fxFlex="730px">
+    <mat-card fxFlex="720px">
         <mat-card-content>
             <table>
                 <tr>
@@ -11,6 +11,15 @@
                                     {{months[baseDate.getMonth()]}} {{baseDate.getFullYear()}}
                                 </td>
                                 <td class="movement" (click)="addMonth()">&gt;</td>
+                            </tr>
+                            <tr>
+                                <td class="weekday">Sun</td>
+                                <td class="weekday">Mon</td>
+                                <td class="weekday">Tue</td>
+                                <td class="weekday">Wed</td>
+                                <td class="weekday">Thu</td>
+                                <td class="weekday">Fri</td>
+                                <td class="weekday">Sat</td>
                             </tr>
                         </table>
                     </td>

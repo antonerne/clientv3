@@ -21,8 +21,8 @@ export class Variation implements IVariation, IComparable<Variation> {
 
     constructor(other?: IVariation) {
         this.id = (other && other.id) ? other.id : "";
-        this.start_date = (other) ? other.start_date : new Date(0);
-        this.end_date = (other) ? other.end_date : new Date(0);
+        this.start_date = (other) ? new Date(other.start_date) : new Date(0);
+        this.end_date = (other) ? new Date(other.end_date) : new Date(0);
         this.is_mids = (other) ? other.is_mids : false;
         this.site = (other) ? other.site : "";
         if (other && other.schedule) {
@@ -65,7 +65,7 @@ export class Variation implements IVariation, IComparable<Variation> {
             && day < this.schedule.workdays.length) {
             const wd = this.schedule.workdays[day];
             wd.work_center = wkctr;
-            wd.work_code = code;
+            wd.code = code;
             wd.start_hour = start;
             wd.hours_worked = hours;
             this.schedule.workdays[day] = wd;

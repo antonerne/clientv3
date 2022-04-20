@@ -104,7 +104,7 @@ export class Assignment implements IAssignment, IComparable<Assignment> {
         if (sched.workdays) {
             sched.workdays.sort((a,b) => a.compareTo(b));
             let day = Math.floor((ckDate.getTime() - this.start_date.getTime()) 
-                / (24 * 60 * 60 * 1000)) & sched.days_in_schedule;
+                / (24 * 60 * 60 * 1000)) % sched.workdays.length;
             return sched.workdays[day];
         }
         return undefined;

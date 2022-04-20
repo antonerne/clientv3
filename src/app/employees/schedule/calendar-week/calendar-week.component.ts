@@ -6,10 +6,25 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./calendar-week.component.scss']
 })
 export class CalendarWeekComponent implements OnInit {
-  @Input() dates: Date[] = []; 
-  @Input() baseDate: Date = new Date();
+  private _dates: Date[];
+  private _baseDate: Date;
+  @Input() set dates(value: Date[]) {
+    this._dates = value;
+  }
+  get dates(): Date[] {
+    return this._dates;
+  } 
+  @Input() set baseDate(value: Date) {
+    this._baseDate = value;
+  }
+  get baseDate(): Date {
+    return this._baseDate;
+  }
 
-  constructor() { }
+  constructor() {
+    this._baseDate = new Date();
+    this._dates = [];
+   }
 
   ngOnInit(): void {
   }

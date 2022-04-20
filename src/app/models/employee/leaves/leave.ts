@@ -26,7 +26,7 @@ export class Leave implements ILeave, IComparable<Leave> {
 
     constructor(other?: ILeave) {
         this.id = (other && other.id) ? other.id : "";
-        this.leave_date = (other) ? other.leave_date : new Date(0);
+        this.leave_date = (other) ? new Date(other.leave_date) : new Date(0);
         this.code = (other) ? other.code : "";
         this.hours = (other) ? other.hours : 0;
         this.status = (other) ? other.status : Statuses.REQUESTED;
@@ -40,5 +40,14 @@ export class Leave implements ILeave, IComparable<Leave> {
         }
         return (this.leave_date.getTime() < other.leave_date.getTime())
             ? -1 : 1;
+    }
+
+    dateEqual(other: Date): boolean {
+        if (this.leave_date.getFullYear() === other.getFullYear()
+            && this.leave_date.getMonth() === other.getMonth()
+            && this.leave_date.getDate() === other.getDate()) {
+            return true;
+        }
+        return false;
     }
 }

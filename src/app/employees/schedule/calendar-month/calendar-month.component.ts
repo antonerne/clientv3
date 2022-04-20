@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./calendar-month.component.scss']
 })
 export class CalendarMonthComponent implements OnInit {
-  baseDate: Date = new Date();
+  baseDate: Date;
   weeks: Array<Date[]> = new Array();
   months = new Array("January", "Febuary", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December");

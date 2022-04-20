@@ -5,15 +5,18 @@ import { LoginComponent } from './auth/login/login.component';
 import { MustchangeComponent } from './auth/mustchange/mustchange.component';
 import { VerifyComponent } from './auth/verify/verify.component';
 import { CalendarMonthComponent } from './employees/schedule/calendar-month/calendar-month.component';
-import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'home', component: CalendarMonthComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'verify', component: VerifyComponent},
   { path: 'forgot', component: ForgotComponent},
-  { path: 'mustchange', component: MustchangeComponent}
+  { path: 'mustchange', component: MustchangeComponent},
+  { path: 'verify', component: VerifyComponent},
+  { path: '', component: CalendarMonthComponent, children: [
+    { path: 'employee', loadChildren: () => import('./employees/employees.module')
+      .then(m => m.EmployeesModule)},
+  ]},
+  { path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

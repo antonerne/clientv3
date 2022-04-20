@@ -83,7 +83,7 @@ export class Schedule implements ISchedule, IComparable<Schedule> {
                 if (wd.day === day) {
                     wd.work_center = (wkctr !== "") 
                         ? wd.work_center = wkctr : undefined;
-                    wd.work_code = code;
+                    wd.code = code;
                     wd.start_hour = start;
                     wd.hours_worked = hours;
                     this.workdays[i] = wd;

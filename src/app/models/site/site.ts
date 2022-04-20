@@ -1,18 +1,18 @@
-import { Employee } from "../employee/employee";
+import { IEmployee, Employee } from "../employee/employee";
 import { IComparable } from "../utilities/comparable";
-import { SiteLaborCode } from "./laborcode";
-import { Workcenter } from "./workcenter";
-import { WorkCode } from "./workcode";
+import { ISiteLaborCode, SiteLaborCode } from "./laborcode";
+import { IWorkcenter, Workcenter } from "./workcenter";
+import { IWorkCode, WorkCode } from "./workcode";
 
 export interface ISite {
     id: string;
     code: string;
     title: string;
     utc_difference: number;
-    work_codes?: WorkCode[] | undefined;
-    labor_codes?: SiteLaborCode[] | undefined;
-    work_centers?: Workcenter[] | undefined;
-    employees?: Employee[] | undefined;
+    work_codes?: IWorkCode[] | undefined;
+    labor_codes?: ISiteLaborCode[] | undefined;
+    work_centers?: IWorkcenter[] | undefined;
+    employees?: IEmployee[] | undefined;
     date_created?: Date;
     last_updated?: Date;
 }
