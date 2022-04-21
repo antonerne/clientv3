@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="center">
+    <table>
+        <tr>
+            <td class="label">{{this.contacttype.description}}</td>
+            <td class="required">
+                <ng-container *ngIf="isRequired()">REQUIRED</ng-container>
+            </td>
+            <td class="label">
+                <form [formGroup]="contactForm">
+                    <mat-form-field style="width:225px">
+                        <input matInput [placeholder]="contacttype.description"
+                            formControlName="contact" (blur)="changeForm()">
+                        <mat-error *ngIf="contactInput.hasError('required') && isRequired()">
+                            Contact Information is required
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>

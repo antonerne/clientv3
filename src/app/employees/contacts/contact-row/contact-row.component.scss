@@ -1,0 +1,30 @@
+div {
+    padding: 0px;
+    margin: 0px;
+}
+
+input {
+    min-width: unset!important;
+    width: 250px!important;
+}
+
+table, tr, td {
+    border: none;
+}
+
+.label {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.required {
+    color: red;
+    width: 75px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}

@@ -7,11 +7,15 @@ import { ScheduleModule } from './schedule/schedule.module';
 import { ProfileComponent } from './profile/profile.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { EmployeeComponent } from './employee/employee.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { ContactRowComponent } from './contacts/contact-row/contact-row.component';
 
 @NgModule({
   declarations: [
     ProfileComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    ContactsComponent,
+    ContactRowComponent
   ],
   imports: [
     CommonModule,

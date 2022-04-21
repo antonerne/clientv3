@@ -3,7 +3,7 @@
         {"title": "Employee", "menus": [
             {"title": "Schedule", "link": "/employee/home", "roles": [ "employee"]},
             {"title": "Profile", "link": "/employee/profile", "roles": [ "employee"]},
-            {"title": "Contact Info", "link": "/home", "roles": [ "employee"]},
+            {"title": "Contact Info", "link": "/employee/contacts", "roles": [ "employee"]},
             {"title": "Specialty Info", "link": "/home", "roles": [ "employee"]},
             {"title": "Leaves", "link": "/home", "roles": [ "employee"]},
             {"title": "Leave Request", "link": "/home", "roles": [ "employee"]}

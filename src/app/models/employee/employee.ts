@@ -480,4 +480,14 @@ export class Employee implements IEmployee, IComparable<Employee> {
         }
         return "";
     }
+
+    getContactByCode(code: string): string {
+        let answer = "";
+        this.contacts?.forEach(ct => {
+            if (ct.code.toLowerCase() === code.toLowerCase()) {
+                answer = ct.info;
+            }
+        });
+        return answer;
+    }
 }

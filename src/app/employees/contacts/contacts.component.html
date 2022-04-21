@@ -1,0 +1,15 @@
+<div fxLayout="row" fxLayoutAlign="center" class="top-div">
+    <mat-card fxFlex="670px">
+        <mat-card-header>
+            <mat-card-title>
+                <div class="mat-headline">Current Employee Contact Information</div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="column" fxLayoutAlign="center">
+                <app-contact-row *ngFor="let ct of team.contactTypes"
+                    [contacttype]="ct"></app-contact-row>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

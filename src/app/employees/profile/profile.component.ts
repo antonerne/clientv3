@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Employee } from 'src/app/models/employee/employee';
 import { Team } from 'src/app/models/team/team';
@@ -32,7 +33,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private empService: EmployeeService
+    private empService: EmployeeService,
+    private router: Router
   ) { 
     const now = new Date();
     this.profileForm = this.formBuilder.group({
@@ -114,6 +116,9 @@ export class ProfileComponent implements OnInit {
           next: (data) => {
             this.authService.showProgress = false;
             if (field === "email") {
+              this.authService.statusMessage = "Employee Updated: Verification "
+                + "Message send to email address";
+              this.router.navigate(['/verify']);
             } else {
               this.authService.statusMessage = "Employee Updated";
             }

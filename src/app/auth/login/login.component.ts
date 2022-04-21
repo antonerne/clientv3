@@ -32,7 +32,11 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: this.email,
       password: this.password,
-    })
+    });
+    let user = this.authService.getUser();
+    if (user) {
+      this.router.navigate(['/employee/']);
+    }
    }
 
   ngOnInit(): void {
