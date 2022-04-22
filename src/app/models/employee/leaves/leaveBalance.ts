@@ -13,7 +13,7 @@ export class LeaveBalance implements ILeaveBalance, IComparable<LeaveBalance> {
     public carryover: number;
     public annual_leave: number;
 
-    constructor(other?: LeaveBalance) {
+    constructor(other?: ILeaveBalance) {
         this.id = (other && other.id) ? other.id : "";
         this.year = (other) ? other.year : new Date().getFullYear();
         this.carryover = (other) ? other.carryover : 0;

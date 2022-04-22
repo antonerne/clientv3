@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Employee } from 'src/app/models/employee/employee';
+import { Employee, IEmployee } from 'src/app/models/employee/employee';
 import { Contact } from 'src/app/models/employee/employeeInfo/companyInfo';
 import { ContactType } from 'src/app/models/team/contacts';
 import { EmployeeService } from '../../employee.service';
@@ -13,7 +13,7 @@ import { EmployeeService } from '../../employee.service';
 })
 export class ContactRowComponent implements OnInit {
   private _contactType: ContactType = new ContactType();
-  employee: Employee = new Employee();
+  private _employee: Employee = new Employee();
   contactInput: FormControl = new FormControl('',[Validators.required]);
   contactForm: FormGroup;
   profileError: string = "";
@@ -23,6 +23,13 @@ export class ContactRowComponent implements OnInit {
   }
   get contacttype(): ContactType {
     return this._contactType;
+  }
+  @Input() set employee(value: IEmployee) {
+    this._employee = new Employee(value);
+    this.setContact();
+  }
+  get employee(): Employee {
+    return this._employee;
   }
 
   constructor(
@@ -41,11 +48,19 @@ export class ContactRowComponent implements OnInit {
   changeForm() {
     if (this.contactForm.valid) {
       this.authService.showProgress = true;
-      this.empService.updateEmployee("contact", this._contactType.code, 
-        this.contactInput.value).subscribe({
+      this.empService.updateEmployee(this.employee.id, "contact", 
+        this._contactType.code, this.contactInput.value).subscribe({
           next: (data) => {
             this.authService.showProgress = false;
             this.authService.statusMessage = "Employee Updated";
+            this.employee = new Employee(data);
+            var user = this.authService.getUser();
+            if (user) {
+              if (user.id === this.employee.id) {
+                this.authService.setUser(data);
+              }
+              this.authService.setUserInSite(data);
+            }
           }, 
           error: (error) => {
             this.authService.showProgress = false;

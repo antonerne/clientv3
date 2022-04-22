@@ -17,7 +17,7 @@ export interface ISite {
     last_updated?: Date;
 }
 
-export class Site implements IComparable<Site> {
+export class Site implements ISite, IComparable<Site> {
     public id: string;
     public code: string;
     public title: string;

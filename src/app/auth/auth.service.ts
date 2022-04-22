@@ -7,7 +7,7 @@ import { map, tap } from 'rxjs/operators'
 import { LoginResponse, Message, NewEmployeeResponse } from '../models/utilities/Login';
 import { Team } from '../models/team/team';
 import { Site } from '../models/site/site';
-import { Employee } from '../models/employee/employee';
+import { Employee, IEmployee } from '../models/employee/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -45,8 +45,33 @@ export class AuthService extends CacheService {
     return this.getItem('site');
   }
 
+  setSite(value: Site) {
+    this.setItem('site', value);
+  }
+
   getUser(): Employee | null {
     return this.getItem('user');
+  }
+
+  setUser(data: IEmployee) {
+    this.setItem('user', data);
+  }
+
+  setUserInSite(data: IEmployee) {
+    let site = this.getSite();
+    if (site && site.employees) {
+      let found = false;
+      for (let i=0; i < site.employees.length && !found; i++) {
+        if (site.employees[i].id === data.id) {
+          site.employees[i] = new Employee(data);
+          found = true;
+        }
+      }
+      if (!found) {
+        site.employees.push(new Employee(data));
+      }
+      this.setItem('site', site);
+    }
   }
   
   getDecodedToken(): IAuthStatus {

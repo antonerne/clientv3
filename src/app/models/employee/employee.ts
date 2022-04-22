@@ -14,7 +14,6 @@ import { WorkDay } from './assignments/workday';
 import { Team } from "../team/team";
 import { WorkCode } from "../site/workcode";
 import { IVariation, Variation } from './assignments/variation';
-import { ObjectId } from 'mongodb';
 
 export interface IEmployee {
     id: string;
@@ -57,7 +56,7 @@ export class Employee implements IEmployee, IComparable<Employee> {
     public createdOn?: Date | undefined;
     public updatedOn?: Date | undefined;
 
-    constructor(other?: Employee) {
+    constructor(other?: IEmployee) {
         this.id = (other && other.id) ? other.id : "";
         this.email = (other) ? other.email : "";
         this.teamID = (other && other.teamID) ? other.teamID : "";

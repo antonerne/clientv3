@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Employee } from 'src/app/models/employee/employee';
+import { Employee, IEmployee } from 'src/app/models/employee/employee';
 import { Team } from 'src/app/models/team/team';
 import { twoOfEachPassword } from 'src/app/utilities/common';
 import { PasswordValidation } from 'src/app/utilities/must-match.directive';
@@ -17,7 +17,14 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   changePasswordForm: FormGroup;
   profileError: string = "";
-  employee: Employee;
+  private _employee: Employee = new Employee();
+  @Input() set employee(value: IEmployee) {
+    this._employee = new Employee(value);
+    this.setEmployee();
+  }
+  get employee(): IEmployee {
+    return this._employee;
+  }
   team: Team;
   showPasswordChange: boolean = false;
   newpassword = new FormControl('', [
@@ -60,13 +67,6 @@ export class ProfileComponent implements OnInit {
       this.team = new Team(tm);
     } else {
       this.team = new Team();
-    }
-    var emp = this.authService.getUser();
-    if (emp) {
-      this.employee = new Employee(emp);
-      this.setEmployee();
-    } else {
-      this.employee = new Employee();
     }
   }
 
@@ -111,7 +111,7 @@ export class ProfileComponent implements OnInit {
         subfield = field;
         field = "name";
       }
-      this.empService.updateEmployee(field, subfield, value)
+      this.empService.updateEmployee(this._employee.id, field, subfield, value)
         .subscribe({
           next: (data) => {
             this.authService.showProgress = false;
@@ -152,7 +152,7 @@ export class ProfileComponent implements OnInit {
     this.authService.showProgress = true;
     this.authService.statusMessage = "Updating Employee";
     this.profileError = '';
-    this.empService.updateEmployee(field, '', passwd)
+    this.empService.updateEmployee(this.employee.id, field, '', passwd)
       .subscribe({
         next: (data) => {
           this.authService.showProgress = false;

@@ -46,24 +46,26 @@ export class MustchangeComponent implements OnInit {
     var user = this.authService.getUser();
     this.authService.showProgress = true;
     this.authService.statusMessage = "Changing Password";
-    this.empService.updateEmployee("password", "", this.newpassword.value)
-      .subscribe({
-        next: (data) => {
-          this.authService.showProgress = false;
-          this.authService.statusMessage = "Password Updated";
-          this.router.navigate(['/employee/home']);
-        },
-        error: (error) => {
-          this.authService.showProgress = false;
-          this.authService.statusMessage = '';
-          if (error.error.error) {
-            this.forgotError = error.error.error;
-          } else if (error.error.message) {
-            this.forgotError = error.error.message;
-          } else {
-            this.forgotError = "Unknown Error Occurred";
+    if (user) {
+      this.empService.updateEmployee(user.id, "password", "", this.newpassword.value)
+        .subscribe({
+          next: (data) => {
+            this.authService.showProgress = false;
+            this.authService.statusMessage = "Password Updated";
+            this.router.navigate(['/employee/home']);
+          },
+          error: (error) => {
+            this.authService.showProgress = false;
+            this.authService.statusMessage = '';
+            if (error.error.error) {
+              this.forgotError = error.error.error;
+            } else if (error.error.message) {
+              this.forgotError = error.error.message;
+            } else {
+              this.forgotError = "Unknown Error Occurred";
+            }
           }
-        }
-      })
+        });
+    }
   }
 }
