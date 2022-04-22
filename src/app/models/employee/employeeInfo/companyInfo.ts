@@ -1,5 +1,3 @@
-import { SpecialtyLevels } from "../../team/specialties";
-
 export interface ICompanyInfo {
     company_code: string;
     company_employee_id: string;
@@ -100,17 +98,17 @@ export class Contact implements IContact {
 export interface IEmployeeSpecialty {
     id?: string | undefined;
     code: string;
-    level: SpecialtyLevels;
+    level: boolean;
 }
 
 export class EmployeeSpecialty implements IEmployeeSpecialty {
     public id?: string | undefined;
     public code: string;
-    public level: SpecialtyLevels;
+    public level: boolean;
 
     constructor(other?: IEmployeeSpecialty) {
         this.id = (other && other.id) ? other.id : undefined;
         this.code = (other) ? other.code : "";
-        this.level = (other) ? other.level : SpecialtyLevels.NONE;
+        this.level = (other) ? other.level : false;
     }
 }

@@ -9,6 +9,7 @@ import { EmployeesRoutingModule } from './employees-routing.module';
 import { EmployeeComponent } from './employee/employee.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactRowComponent } from './contacts/contact-row/contact-row.component';
+import { SpecialtiesModule } from './specialties/specialties.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ContactRowComponent } from './contacts/contact-row/contact-row.componen
     ReactiveFormsModule,
     FlexLayoutModule,
     ScheduleModule,
-    EmployeesRoutingModule
+    EmployeesRoutingModule,
+    SpecialtiesModule
   ]
 })
 export class EmployeesModule { }

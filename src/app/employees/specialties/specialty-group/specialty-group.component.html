@@ -1,0 +1,13 @@
+<mat-card fxFlex="250px">
+    <mat-card-header>
+        <mat-card-title>
+            <div class="mat-headline">{{group.title}}</div>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayout="column" fxLayoutAlign="center">
+            <app-specialty-item *ngFor="let item of group.areas" 
+                [employee]="employee" [specialty]="item"></app-specialty-item>
+        </div>
+    </mat-card-content>
+</mat-card>

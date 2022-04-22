@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   changePasswordForm: FormGroup;
   profileError: string = "";
-  private _employee: Employee = new Employee();
+  private _employee: IEmployee = new Employee();
   @Input() set employee(value: IEmployee) {
     this._employee = new Employee(value);
     this.setEmployee();
@@ -67,6 +67,13 @@ export class ProfileComponent implements OnInit {
       this.team = new Team(tm);
     } else {
       this.team = new Team();
+    }
+    if (this.employee.id === "") {
+      let user = this.authService.getUser();
+      if (user) {
+        this.employee = new Employee(user);
+        this.setEmployee();
+      }
     }
   }
 
@@ -122,10 +129,13 @@ export class ProfileComponent implements OnInit {
             } else {
               this.authService.statusMessage = "Employee Updated";
             }
+            this.employee = new Employee(data);
             var user = this.authService.getUser();
             if (user) {
-              this.employee = new Employee(user);
-              this.setEmployee();
+              if (user.id === this.employee.id) {
+                this.authService.setUser(data);
+              }
+              this.authService.setUserInSite(data);
             }
           },
           error: (error) => {
@@ -157,11 +167,16 @@ export class ProfileComponent implements OnInit {
         next: (data) => {
           this.authService.showProgress = false;
           this.authService.statusMessage = "Password Changed";
+          
+          this.employee = new Employee(data);
           var user = this.authService.getUser();
           if (user) {
-            this.employee = new Employee(user);
-            this.setEmployee();
+            if (user.id === this.employee.id) {
+              this.authService.setUser(data);
+            }
+            this.authService.setUserInSite(data);
             this.showPasswordChange = false;
+            this.setEmployee();
           }
         },
         error: (error) => {

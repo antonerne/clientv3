@@ -4,30 +4,32 @@ import { Employee, IEmployee } from 'src/app/models/employee/employee';
 import { Team } from 'src/app/models/team/team';
 
 @Component({
-  selector: 'app-contacts',
-  templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss']
+  selector: 'app-specialties',
+  templateUrl: './specialties.component.html',
+  styleUrls: ['./specialties.component.scss']
 })
-export class ContactsComponent implements OnInit {
-  team: Team = new Team();
+export class SpecialtiesComponent implements OnInit {
   private _employee: Employee = new Employee();
   @Input() set employee(value: IEmployee) {
     this._employee = new Employee(value);
   }
-  get employee(): IEmployee {
+  get employee(): Employee {
     return this._employee;
   }
+  team: Team = new Team();
 
-  constructor(private authService: AuthService) { 
+  constructor(
+    private authService: AuthService
+  ) { 
+    if (this.employee.id === "") {
+      let user = this.authService.getUser();
+      if (user) {
+        this.employee = new Employee(user);
+      }
+    }
     let tm = this.authService.getTeam();
     if (tm) {
       this.team = new Team(tm);
-    }
-    if (this._employee.id === "") {
-      let user = this.authService.getUser();
-      if (user) {
-        this._employee = new Employee(user);
-      }
     }
   }
 

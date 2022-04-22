@@ -1,0 +1,15 @@
+<div fxLayout="row" fxLayoutAlign="center" class="top-div">
+    <mat-card fxFlex="800px">
+        <mat-card-header>
+            <mat-card-title>
+                <div class="mat-headline">Current Employee Specialty Information</div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+                <app-specialty-group *ngFor="let group of team.specialtyGroups"
+                    [employee]="employee" [group]="group"></app-specialty-group>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

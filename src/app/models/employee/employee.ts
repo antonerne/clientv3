@@ -88,13 +88,11 @@ export class Employee implements IEmployee, IComparable<Employee> {
         }
         this.specialties = [];
         if (other && other.specialties) {
-            if (other.specialties) {
-                other.specialties.forEach(sp => {
-                    if (other.specialties) {
-                        other.specialties.push(new EmployeeSpecialty(sp));
-                    }
-                })
-            }
+            other.specialties.forEach(sp => {
+                if (this.specialties) {
+                    this.specialties.push(new EmployeeSpecialty(sp));
+                }
+            });
         }
         this.labor = [];
         if (other && other.labor) {
@@ -485,6 +483,16 @@ export class Employee implements IEmployee, IComparable<Employee> {
         this.contacts?.forEach(ct => {
             if (ct.code.toLowerCase() === code.toLowerCase()) {
                 answer = ct.info;
+            }
+        });
+        return answer;
+    }
+
+    getSpecialtyLevel(code: string): boolean {
+        let answer = false;
+        this.specialties?.forEach(sp => {
+            if (sp.code.toLowerCase() === code.toLowerCase()) {
+                answer = sp.level;
             }
         });
         return answer;
