@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { MenuService } from './services/menu-service.service';
+import { MatAccordion } from '@angular/material/expansion';
+import { Team } from './models/team/team';
+import { Site } from './models/site/site';
 
 @Component({
   selector: 'app-root',
@@ -26,12 +29,31 @@ export class AppComponent {
       this.router.navigate(['/login']);
     } else {
       var user = this.authService.getUser();
-      if (user) {
-        this.menuService.getMenus(user.roles);
-      } else {
-        this.menuService.clearMenus();
+      var expires = this.authService.getUserExpires();
+      let now = new Date();
+      if (expires) {
+        let userExp = new Date(expires);
+        if (userExp.getTime() > now.getTime()) {
+          if (user) {
+            this.menuService.getMenus(user.roles);
+          } else {
+            this.menuService.clearMenus();
+          }
+          this.router.navigate(['/home']);
+        } else {
+          this.logout();
+        }
       }
-      this.router.navigate(['/home']);
+    }
+    var tm = authService.getTeam();
+    var st = authService.getSite();
+    if (tm) {
+      let team = new Team(tm);
+      this.title = team.name;
+      if (st) {
+        let site = new Site(st);
+        this.title += " - " + site.title;
+      }
     }
   }
 

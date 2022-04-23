@@ -10,6 +10,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactRowComponent } from './contacts/contact-row/contact-row.component';
 import { SpecialtiesModule } from './specialties/specialties.module';
+import { LeavesModule } from './leaves/leaves.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SpecialtiesModule } from './specialties/specialties.module';
     FlexLayoutModule,
     ScheduleModule,
     EmployeesRoutingModule,
-    SpecialtiesModule
+    SpecialtiesModule,
+    LeavesModule
   ]
 })
 export class EmployeesModule { }

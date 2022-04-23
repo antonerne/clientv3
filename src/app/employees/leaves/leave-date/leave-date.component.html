@@ -1,0 +1,6 @@
+<span [style]="getStyle()">
+    {{getDisplay()}}
+    <ng-container *ngIf="getHours() !== ''">
+        <span class="superscript">({{getHours()}})</span>
+    </ng-container>
+</span>

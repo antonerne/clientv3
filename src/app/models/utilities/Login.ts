@@ -8,6 +8,7 @@ export interface LoginResponse {
     user: IEmployee;
     mustchange: boolean;
     token: string;
+    expires: Date;
 }
 
 export interface Message {

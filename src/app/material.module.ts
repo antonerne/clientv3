@@ -20,6 +20,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -44,7 +45,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatButtonToggleModule,
     MatRadioModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatExpansionModule
   ],
   exports: [
     MatButtonModule,
@@ -66,7 +68,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatButtonToggleModule,
     MatRadioModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

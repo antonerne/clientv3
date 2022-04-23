@@ -18,7 +18,7 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    width: 150px;
+    width: 200px;
     background: #7b1fa2
 }
 
@@ -52,4 +52,12 @@
     line-height: 12px!important;
     padding: 0px!important;
     margin: 2px!important;
+}
+.example-action-buttons {
+    padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
 }

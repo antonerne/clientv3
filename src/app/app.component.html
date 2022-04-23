@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="toolbarTop">
   <mat-icon svgIcon="scheduler"></mat-icon>
-  <a mat-button><h1>Osan Scheduler</h1></a>
+  <a mat-button><h1>{{title}}</h1></a>
   <span class="flex-spacer"></span>
   <a mat-button *ngIf="authService.isAuthenticated" (click)="logout()">Log Out</a>
   <a mat-button *ngIf="!authService.isAuthenticated" routerLink="/login">Log In</a>
@@ -9,16 +9,22 @@
 <mat-sidenav-container class="main-context">
   <mat-sidenav #sidenav mode="side" opened class="sidenav"
   [fixedInViewport]="true" [fixedBottomGap]="30" [fixedTopGap]="50">
-    <ng-container *ngFor="let head of this.menuService.MenuList">
-      <button mat-flat-button color="Primary" class="menu-buttons"
-        style="cursor:default">{{head.title}}</button>
-      <ng-container *ngFor="let item of head.menus">
-        <button mat-raised-button color="accent" class="menu-buttons" 
-          [routerLink]="item.link">
-          {{item.title}}
-        </button>
-      </ng-container>
-    </ng-container>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let head of this.menuService.MenuList">
+        <mat-expansion-panel-header [collapsedHeight]="'30px'"
+          [expandedHeight]="'30px'">
+          <mat-panel-title>
+            {{head.title}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let item of head.menus">
+          <button mat-raised-button color="accent" class="menu-buttons" 
+            [routerLink]="item.link">
+            {{item.title}}
+          </button>
+        </ng-container>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-sidenav>
   <mat-sidenav-content style="overflow: visible;">
     <router-outlet></router-outlet>

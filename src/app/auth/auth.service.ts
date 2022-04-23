@@ -57,6 +57,14 @@ export class AuthService extends CacheService {
     this.setItem('user', data);
   }
 
+  setUserExpire(data: Date) {
+    this.setItem('expires', data);
+  }
+
+  getUserExpires(): Date | null {
+    return this.getItem('expires');
+  }
+
   setUserInSite(data: IEmployee) {
     let site = this.getSite();
     if (site && site.employees) {
@@ -96,6 +104,7 @@ export class AuthService extends CacheService {
         this.setItem('team', resp.team);
         this.setItem('site', resp.site);
         this.setItem('user', resp.user);
+        this.setItem('expires', resp.expires);
         this.mustChange = resp.user.creds.must_change;
         this.showProgress = false;
       }));
@@ -129,6 +138,7 @@ export class AuthService extends CacheService {
         this.setItem('site', resp.site);
         this.setItem('user', resp.user);
         this.mustChange = resp.user.creds.must_change;
+
         this.showProgress = false;
       }));
   }
