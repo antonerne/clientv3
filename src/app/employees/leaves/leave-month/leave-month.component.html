@@ -1,1 +1,11 @@
-<p>leave-month works!</p>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0">
+    <div class="month">{{getMonth()}}</div>
+    <div class="leaves">
+        <app-leave-date *ngFor="let lv of month.groups; index as i" [leavedates]="lv"
+            [textcolor]="getTextColor(lv)" [isholiday]="false" 
+            [standardhours]="standardhours"
+            [addcomma]="month.groups.length - 1 > i"></app-leave-date>
+    </div>
+    <div class="actual">{{getActualHours()}}</div>
+    <div class="planned">{{getPlannedHours()}}</div>
+</div>

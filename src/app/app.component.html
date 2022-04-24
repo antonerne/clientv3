@@ -10,20 +10,22 @@
   <mat-sidenav #sidenav mode="side" opened class="sidenav"
   [fixedInViewport]="true" [fixedBottomGap]="30" [fixedTopGap]="50">
     <mat-accordion class="example-headers-align">
-      <mat-expansion-panel *ngFor="let head of this.menuService.MenuList">
-        <mat-expansion-panel-header [collapsedHeight]="'30px'"
-          [expandedHeight]="'30px'">
-          <mat-panel-title>
-            {{head.title}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <ng-container *ngFor="let item of head.menus">
-          <button mat-raised-button color="accent" class="menu-buttons" 
-            [routerLink]="item.link">
-            {{item.title}}
-          </button>
-        </ng-container>
-      </mat-expansion-panel>
+      <ng-container *ngFor="let head of this.menuService.MenuList">
+        <mat-expansion-panel [expanded]="head.title.toLowerCase() === 'employee'">
+          <mat-expansion-panel-header [collapsedHeight]="'30px'"
+            [expandedHeight]="'30px'">
+            <mat-panel-title>
+              {{head.title}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ng-container *ngFor="let item of head.menus">
+            <button mat-raised-button color="accent" class="menu-buttons" 
+              [routerLink]="item.link">
+              {{item.title}}
+            </button>
+          </ng-container>
+        </mat-expansion-panel>
+      </ng-container>
     </mat-accordion>
   </mat-sidenav>
   <mat-sidenav-content style="overflow: visible;">

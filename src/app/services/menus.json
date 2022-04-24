@@ -5,7 +5,7 @@
             {"title": "Profile", "link": "/employee/profile", "roles": [ "employee"]},
             {"title": "Contact Info", "link": "/employee/contacts", "roles": [ "employee"]},
             {"title": "Specialty Info", "link": "/employee/specialty", "roles": [ "employee"]},
-            {"title": "Leaves", "link": "/home", "roles": [ "employee"]},
+            {"title": "Leaves", "link": "/employee/leaves", "roles": [ "employee"]},
             {"title": "Leave Request", "link": "/home", "roles": [ "employee"]}
         ]},{"title": "Site Schedule", "menus": [
             {"title": "Schedule", "link": "/home", "roles": [ "employee"]},

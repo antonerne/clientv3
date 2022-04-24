@@ -1,0 +1,11 @@
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="0">
+    <div class="label">Holidays</div>
+    <div fxLayout="row" fxlayoutAlign="start start" fxLayoutGap="0">
+        <div class="month">ID</div>
+        <div class="actual">Actual</div>
+        <div class="leaves">Dates</div>
+        <div class="hours">Hours</div>
+    </div>
+    <app-leave-holiday *ngFor="let hol of holidays; index as i" [year]="year"
+        [holiday]="hol"></app-leave-holiday>
+</div>

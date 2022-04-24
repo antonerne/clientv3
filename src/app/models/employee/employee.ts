@@ -497,4 +497,30 @@ export class Employee implements IEmployee, IComparable<Employee> {
         });
         return answer;
     }
+
+    getStandardHours(): number {
+        let answer = 8.0;
+        let count = 0
+        let asgmt = new Assignment();
+        let now = new Date();
+        this.assignments.forEach(a => {
+            if (a.isActiveOnDate(now)) {
+                asgmt = a;
+            }
+        });
+        if (asgmt.schedules && asgmt.schedules.length > 0) {
+            let sch = asgmt.schedules[0];
+            if (sch.workdays) {
+                sch.workdays.forEach(wd => {
+                    if (wd.code !== '') {
+                        count++;
+                    }
+                });
+            }
+        }
+        if (count % 4 === 0) {
+            answer = 10.0;
+        }
+        return answer;
+    }
 }

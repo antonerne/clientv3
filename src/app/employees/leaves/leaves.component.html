@@ -1,0 +1,34 @@
+<div fxLayout="row" fxLayoutAlign="center" class="top-div">
+    <mat-card fxFlex="850px">
+        <mat-card-header>
+            <mat-card-title>
+                <div class="mat-headline">Current Employee Leave Information</div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="0" >
+                <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0" 
+                style="width: 100%;">
+                    <div class="label">Display Year:</div>
+                    <div class="year">
+                        <form [formGroup]="yearForm">
+                        <select mat-select panelClass="yearPanel"
+                            formControlName="yearselect" (change)="changeYear($event)">
+                            <ng-container *ngFor="let year of aYears">
+                                <option [value]="year">{{year}}</option>
+                            </ng-container>
+                        </select>
+                        </form>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0" 
+                style="width: 100%;">
+                    <app-leave-holidays *ngIf="showHolidays()" [year]="year"
+                        [employee]="employee" [team]="team"></app-leave-holidays>
+                    <app-leave-leaves [year]="year" [employee]="employee" 
+                    [team]="team"></app-leave-leaves>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

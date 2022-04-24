@@ -1,0 +1,16 @@
+<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="0">
+    <div class="label">Other Time Off</div>
+    <div fxLayout="row" fxlayoutAlign="start" fxLayoutGap="0">
+        <div class="month">Month</div>
+        <div class="leaves">Dates</div>
+        <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="0">
+            <div class="hours">HOURS</div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="0">
+                <div class="actual">ACTUAL</div>
+                <div class="planned">PLAN</div>
+            </div>
+        </div>
+    </div>
+    <app-leave-month *ngFor="let month of leaveMonths" [team]="team" [month]="month" 
+    [standardhours]="employee.getStandardHours()"></app-leave-month>
+</div>

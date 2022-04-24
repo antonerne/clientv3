@@ -1,1 +1,11 @@
-<p>leave-holiday works!</p>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="0">
+    <div class="month">{{holiday.holiday.code}}</div>
+    <div class="actual">{{getActualDate()}}</div>
+    <div class="leaves">
+        <app-leave-date *ngFor="let dt of holiday.leaves; index as i" 
+            [leave]="dt" [addcomma]="i < holiday.leaves.length - 1"
+            [textcolor]="getTextColor(dt)" [isholiday]="true" 
+            [standardhours]="8"></app-leave-date>
+    </div>
+    <div class="hours">{{getHours()}}</div>
+</div>

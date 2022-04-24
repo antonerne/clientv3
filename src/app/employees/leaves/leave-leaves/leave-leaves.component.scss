@@ -3,6 +3,20 @@ div[fxLayout] {
     padding: 0;
 }
 
+div.label {
+    background-color: darkcyan;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1px 2px 1px 2px;
+    margin: 0;
+    height: 25px;
+    width: 469px;
+    border: black 1px solid;
+}
+
 div.month {
     background-color: burlywood;
     color: black;
@@ -12,7 +26,7 @@ div.month {
     vertical-align: middle;
     padding: 2px;
     margin: 0;
-    height: 25px;
+    height: 40px;
     width: 50px;
     border: black 1px solid;
 }
@@ -21,25 +35,38 @@ div.leaves {
     background-color: white;
     color: black;
     font-size: 12pt;
+    font-weight: bold;
     text-align: center;
     vertical-align: middle;
     padding: 2px;
     margin: 0;
-    height: 25px;
+    height: 40px;
     width: 300px;
+    border: black 1px solid;
+}
+
+div.hours {
+    background-color: white;
+    color: black;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1px 4px;
+    margin: 0;
+    height: 19px;
+    width: 102px;
     border: black 1px solid;
 }
 
 div.actual {
     background-color: blue;
     color: white;
-    font-size: 12pt;
-    font-weight: bold;
     text-align: center;
     vertical-align: middle;
-    padding: 2px;
+    padding: 1px 2px;
     margin: 0;
-    height: 25px;
+    height: 19px;
     width: 50px;
     border: black 1px solid;
 }
@@ -47,13 +74,11 @@ div.actual {
 div.planned {
     background-color: #a11212;
     color: white;
-    font-size: 12pt;
-    font-weight: bold;
     text-align: center;
     vertical-align: middle;
-    padding: 2px;
+    padding: 1px 2px;
     margin: 0;
-    height: 25px;
+    height: 19px;
     width: 50px;
     border: black 1px solid;
 }
