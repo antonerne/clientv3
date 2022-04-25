@@ -11,6 +11,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { ContactRowComponent } from './contacts/contact-row/contact-row.component';
 import { SpecialtiesModule } from './specialties/specialties.module';
 import { LeavesModule } from './leaves/leaves.module';
+import { LeaveRequestModule } from './leave-request/leave-request.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LeavesModule } from './leaves/leaves.module';
     ScheduleModule,
     EmployeesRoutingModule,
     SpecialtiesModule,
-    LeavesModule
+    LeavesModule,
+    LeaveRequestModule
   ]
 })
 export class EmployeesModule { }

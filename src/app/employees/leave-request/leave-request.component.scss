@@ -1,0 +1,29 @@
+.top-div {
+    margin-top: 32px;
+    height: 750px;
+}
+
+.label {
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+    background-color: cyan;
+    color: black;
+    height: 20px;
+}
+
+.buttons {
+    width: 200px;
+}
+
+.request {
+    width: 500px;
+}
+
+.contents {
+    display: flex;
+    flex-grow: 1;
+    border: solid cyan 2px;
+    height: 100%
+}
