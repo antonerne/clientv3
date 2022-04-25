@@ -13,4 +13,37 @@
     </div>
     <app-leave-month *ngFor="let month of leaveMonths" [team]="team" [month]="month" 
     [standardhours]="employee.getStandardHours()"></app-leave-month>
+    <form [formGroup]="balanceForm">
+    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="0">
+        <div class="startEntry">
+            <mat-form-field>
+                <input matInput placeholder="Carryover" class="center"
+                    aria-label="Carryover" 
+                    (blur)="updateBalance('carryover')"
+                    formControlName="carryover" >
+                <mat-error *ngIf="carryover.hasError('required')">
+                    Hours Carried Over as of 1 Jan is required.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="startEntry">
+            <mat-form-field>
+                <input matInput placeholder="Annual Leave" class="center"
+                    aria-label="Annual Leave" 
+                    (blur)="updateBalance('annualhours')"
+                    formControlName="annualhours" >
+                <mat-error *ngIf="annualhours.hasError('required')">
+                    Annual PTO Hours is required.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="actualTotal">{{getActualHours()}}</div>
+        <div class="plannedTotal">{{getPlannedHours()}}</div>
+    </div>
+    </form>
+    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="0">
+        <div class="blank"></div>
+        <div class="balance">Leave Balance</div>
+        <div class="balanceHours">{{getPTOBalance()}}</div>
+    </div>
 </div>

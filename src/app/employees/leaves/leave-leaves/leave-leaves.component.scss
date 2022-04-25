@@ -10,7 +10,7 @@ div.label {
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
-    padding: 1px 2px 1px 2px;
+    padding: 2px;
     margin: 0;
     height: 25px;
     width: 469px;
@@ -81,4 +81,103 @@ div.planned {
     height: 19px;
     width: 50px;
     border: black 1px solid;
+}
+
+div.startlabel {
+    background-color: transparent;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px 2px;
+    margin: 0;
+    height: 25px;
+    width: 175px;
+    border: white 1px solid;
+}
+
+div.startEntry {
+    background-color: transparent;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    height: 45px;
+    width: 179px;
+    border: white 1px solid;
+}
+
+div.actualTotal {
+    background-color: blue;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px 2px;
+    margin: 0;
+    height: 26px;
+    width: 50px;
+    border: black 1px solid;
+}
+
+div.plannedTotal {
+    background-color: #a11212;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: bottom;
+    padding: 10px 2px;
+    margin: 0;
+    height: 26px;
+    width: 50px;
+    border: black 1px solid;
+}
+
+.center { text-align: center;}
+
+div.balance {
+    background-color: burlywood;
+    color: black;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding: 2px;
+    margin: 0;
+    height: 25px;
+    width: 175px;
+    border: black 1px solid;
+}
+
+div.balanceHours {
+    background-color: #ffcc00;
+    color: black;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding: 2px 4px;
+    margin: 0;
+    height: 25px;
+    width: 104px;
+    border: black 1px solid;
+}
+
+div.blank {
+    background-color: transparent;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding: 2px 2px;
+    margin: 0;
+    height: 25px;
+    width: 175px;
 }
