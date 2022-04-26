@@ -46,9 +46,9 @@ style="height: 665px;">
             </div>
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5">
                 <button mat-raised-button *ngIf="leaverequest._id === 'new'"
-                    color="primary">ADD</button>
+                    color="primary" (click)="updateRequest()">ADD</button>
                 <button mat-raised-button *ngIf="leaverequest._id !== 'new'"
-                    color="accent">UPDATE</button>
+                    color="accent" (click)="updateRequest()">UPDATE</button>
                 <button mat-raised-button *ngIf="leaverequest._id !== 'new'"
                     color="warn">DELETE</button>
             </div>

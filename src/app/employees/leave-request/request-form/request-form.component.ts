@@ -1,8 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Employee } from 'src/app/models/employee/employee';
 import { Leave } from 'src/app/models/employee/leaves/leave';
 import { LeaveRequest, LeaveRequestComment } from 'src/app/models/employee/leaves/leaveRequest';
+import { Site } from 'src/app/models/site/site';
 import { Team } from 'src/app/models/team/team';
+import { EmployeeService } from '../../employee.service';
 
 @Component({
   selector: 'app-request-form',
@@ -28,7 +32,9 @@ export class RequestFormComponent implements OnInit {
   days: Leave[] = [];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private empService: EmployeeService
   ) { 
     this.requestForm = fb.group({
       start: this.startControl,
@@ -88,5 +94,46 @@ export class RequestFormComponent implements OnInit {
       "Aug", "Sep", "Oct", "Nov", "Dec");
     return `${cmt.comment_date.getDate()} ${months[cmt.comment_date.getMonth()]} `
       + `${cmt.comment_date.getFullYear() % 100} - ${cmt.comment}`;
+  }
+
+  updateRequest() {
+    if (!this.leaverequest._id) { this.leaverequest._id = ""; }
+    this.empService.updateLeaveRequest(this.leaverequest._id, this.employeeid,
+      this.startControl.value, this.endControl.value, this.basecode.value,
+      this.newcomment.value).subscribe( lr => {
+        this.leaverequest = new LeaveRequest(lr);
+        let s = this.authService.getSite();
+        let user = this.authService.getUser();
+        let employee = new Employee();
+        if (user) {
+          employee = new Employee(user)
+        }
+        if (s) {
+          let site = new Site(s);
+          let found = false;
+          if (site.employees) {
+            for (let i=0; i < site.employees?.length && !found; i++) {
+              if (site.employees[i].id === this.employeeid) {
+                let emp = new Employee(site.employees[i]);
+                for (let j=0; j < emp.leaveRequests.length && !found; j++) {
+                  if (emp.leaveRequests[j]._id === lr._id) {
+                    found = true;
+                    emp.leaveRequests[j] = new LeaveRequest(lr);
+                  }
+                }
+                if (!found) {
+                  emp.leaveRequests.push(new LeaveRequest(lr));
+                }
+                if (employee.id === this.employeeid) {
+                  this.authService.setUser(employee);
+                }
+                site.employees[i] = emp;
+              }
+            }
+          }
+          this.authService.setSite(site);
+        }
+      });
+    
   }
 }

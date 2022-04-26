@@ -31,6 +31,12 @@ export class LeaveRequestComponent implements OnInit {
     } else {
       this.team = new Team();
     }
+    if (this.employee.id === "") {
+      let user = this.authService.getUser();
+      if (user) {
+        this.employee = new Employee(user);
+      }
+    }
     this.leaveRequest = new LeaveRequest();
     this.leaveRequest._id = "new";
   }
