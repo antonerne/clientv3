@@ -1,0 +1,65 @@
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="2" 
+style="height: 665px;">
+   <div class="label request">Editable Requests</div>
+    <div class="contents request" fxLayout="column" fxLayoutAlign="start center"
+        fxLayoutGap="3">
+        <form [formGroup]="requestForm" fxLayout="column" 
+            fxLayoutAlign="start center" fxLayoutGap="5">
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5">
+                <mat-form-field appearance="fill">
+                    <mat-label>Inclusive Dates</mat-label>
+                    <mat-date-range-input
+                        [rangePicker]="inclusiveDatePicker">
+                        <input matStartDate placeholder="Start Date" formControlName="start">
+                        <input matEndDate placeholder="End Date" formControlName="end">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="inclusiveDatePicker">
+                    </mat-datepicker-toggle>
+                    <mat-date-range-picker #inclusiveDatePicker></mat-date-range-picker>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Base Leave Type</mat-label>
+                    <mat-select formControlName="code">
+                        <ng-container *ngFor="let dc of team.displayCodes">
+                            <mat-option *ngIf="dc.is_leave" [value]="dc.code">
+                                {{dc.name}}
+                            </mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5" class="commentlabel">
+                Leave Request Comments
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5" class="comments">
+                <ng-container *ngFor="let cmt of leaverequest.comments">
+                    {{getComment(cmt)}}<br />
+                </ng-container>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5">
+                <mat-form-field appearance="fill" style="width: 600px">
+                    <textarea matInput formControlName="comment" class="comment"
+                        placeholder="New Comment Text" cdkTextareaAutosize
+                        cdkAutosizeMaxRows="1" cdkAutosizeMaxRows="5">
+                    </textarea>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5">
+                <button mat-raised-button *ngIf="leaverequest._id === 'new'"
+                    color="primary">ADD</button>
+                <button mat-raised-button *ngIf="leaverequest._id !== 'new'"
+                    color="accent">UPDATE</button>
+                <button mat-raised-button *ngIf="leaverequest._id !== 'new'"
+                    color="warn">DELETE</button>
+            </div>
+        </form>
+        <div class="daysLabel" *ngIf="leaverequest._id != 'new'">
+            Leave Day Assignments</div>
+        <div class="days" *ngIf="leaverequest._id !== 'new'">
+            <app-request-form-period [employeeid]="employeeid"
+                [startdate]="leaverequest.start_date" 
+                [enddate]="leaverequest.end_date"
+                [days]="days"></app-request-form-period>
+        </div>
+    </div>
+</div>

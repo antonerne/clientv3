@@ -20,6 +20,7 @@ export class Holiday implements IHoliday, IComparable<Holiday> {
         this.code = (other && other.code) ? other.code : "";
         this.title = (other && other.title) ? other.title : "";
         this.display_order = (other && other.display_order) ? other.display_order : 0;
+        this.actual_dates = new Array();
         if (other && other.actual_dates) {
             other.actual_dates.forEach(dt => {
                 if (this.actual_dates) {

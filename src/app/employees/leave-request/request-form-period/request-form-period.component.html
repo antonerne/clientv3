@@ -1,0 +1,21 @@
+<table>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td class="weekday">Su</td>
+                    <td class="weekday">Mo</td>
+                    <td class="weekday">Tu</td>
+                    <td class="weekday">We</td>
+                    <td class="weekday">Th</td>
+                    <td class="weekday">Fr</td>
+                    <td class="weekday">Sa</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr *ngFor="let week of this.weeks">
+        <app-request-form-week [employeeid]="employeeid" [startdate]="startdate"
+            [enddate]="enddate" [dates]="week"></app-request-form-week>
+    </tr>
+</table>
