@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IEmployee, Employee } from 'src/app/models/employee/employee';
 import { LeaveRequest } from 'src/app/models/employee/leaves/leaveRequest';
@@ -18,6 +18,7 @@ export class LeaveRequestComponent implements OnInit {
   get employee(): Employee {
     return this._employee;
   }
+  @Output() changeWeek = new EventEmitter<LeaveRequest>();
   team: Team;
   public leaveRequest: LeaveRequest;
 
@@ -38,7 +39,7 @@ export class LeaveRequestComponent implements OnInit {
       }
     }
     this.leaveRequest = new LeaveRequest();
-    this.leaveRequest._id = "new";
+    this.leaveRequest.id = "new";
   }
 
   ngOnInit(): void {
@@ -50,8 +51,9 @@ export class LeaveRequestComponent implements OnInit {
 
   setLeaveRequest(id: string) {
     this.leaveRequest = new LeaveRequest();
+    this.leaveRequest.id = "new";
     this.employee.leaveRequests.forEach(lr => {
-      if (lr._id && lr._id === id) {
+      if (lr.id && lr.id === id) {
         this.leaveRequest = new LeaveRequest(lr);
       }
     });
@@ -60,7 +62,7 @@ export class LeaveRequestComponent implements OnInit {
   updateLeaveRequest(req: LeaveRequest) {
     let found = false;
     for (let i=0; i < this.employee.leaveRequests.length && !found; i++) {
-      if (req._id === this.employee.leaveRequests[i]._id) {
+      if (req.id === this.employee.leaveRequests[i].id) {
         found = true;
         this.employee.leaveRequests[i] = new LeaveRequest(req);
       }
@@ -76,5 +78,13 @@ export class LeaveRequestComponent implements OnInit {
       }
     }
     this.authService.setUserInSite(this.employee);
+  }
+
+  updateEmployee(emp: Employee) {
+    this.employee = new Employee(emp);
+  }
+
+  changeLeaveRequest(req: LeaveRequest) {
+    this.changeWeek.emit(req);
   }
 }

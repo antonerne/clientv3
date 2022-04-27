@@ -3,10 +3,13 @@ style="height: 665px;">
    <div class="label buttons">Editable Requests</div>
     <div class="contents buttons">
         <button mat-raised-button color="accent" 
-        class="menu-buttons" reqid="new">New Request</button>
+        class="menu-buttons" 
+        (click)="setRequestDisplay(null)">New Request</button>
         <ng-container *ngFor="let lr of employee.leaveRequests">
             <button mat-raised-button *ngIf="showLeaveRequest(lr)"
-                [color]="getColor(lr)">{{getButtonLabel(lr)}}</button>
+                [color]="getColor(lr)" class="menu-buttons"
+                (click)="setRequestDisplay(lr)">
+                {{getButtonLabel(lr)}}</button>
         </ng-container>
     </div>
 </div>

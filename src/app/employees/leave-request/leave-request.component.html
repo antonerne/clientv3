@@ -10,8 +10,9 @@
             style="width:98%;height: 665px;">
                 <app-request-buttons [employee]="employee" 
                     (showrequest)="setLeaveRequest($event)"></app-request-buttons>
-                <app-request-form [employeeid]="employee.id"
-                [team]="team" [leaverequest]="leaveRequest"></app-request-form>
+                <app-request-form [employee]="employee"
+                [team]="team" [leaverequest]="leaveRequest"
+                (empchange)="updateEmployee($event)"></app-request-form>
             </div>
         </mat-card-content>
     </mat-card>

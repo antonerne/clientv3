@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Leave } from 'src/app/models/employee/leaves/leave';
+import { LeaveRequest } from 'src/app/models/employee/leaves/leaveRequest';
 
 @Component({
   selector: 'app-request-form-period',
@@ -21,6 +22,7 @@ export class RequestFormPeriodComponent implements OnInit {
   get days(): Leave[] {
     return this._days;
   }
+  @Output() changePeriod = new EventEmitter<LeaveRequest>();
   weeks: Array<Leave[]> = []
 
   constructor() { }
@@ -39,9 +41,14 @@ export class RequestFormPeriodComponent implements OnInit {
         }
         newweek = [];
       }
+      newweek.push(lv);
     });
     if (newweek.length > 0) {
       this.weeks.push(newweek);
     }
+  }
+
+  changeLeaveRequest(req: LeaveRequest) {
+    this.changePeriod.emit(req);
   }
 }

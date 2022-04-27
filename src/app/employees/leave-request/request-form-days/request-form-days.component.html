@@ -1,3 +1,4 @@
+<form [formGroup]="dayForm">
 <table class="day" [style]="display">
     <tr>
         <td>&nbsp;</td>
@@ -5,25 +6,22 @@
     </tr>
     <tr>
         <td colspan="2" class="code">
-            <mat-form-field>
             <select matNativeControl formControlName="leaveCode">
                 <option value=""></option>
                 <ng-container *ngFor="let dc of team.displayCodes">
                     <option *ngIf="dc.is_leave" [value]="dc.code">{{dc.code}}</option>
                 </ng-container>
             </select>
-            </mat-form-field>
         </td>
     </tr>
     <tr>
         <td colspan="2" class="workcenter">
-            <mat-form-field>
-                <select matNativeControl formControlName="leaveHours">
-                    <option *ngFor="let v of aHours, index as i" [value]="v">
-                        {{sHours[i]}}
-                    </option>
-                </select>
-            </mat-form-field>
+            <select matNativeControl formControlName="leaveHours">
+                <option *ngFor="let v of aHours, index as i" [value]="v">
+                    {{sHours[i]}}
+                </option>
+            </select>
         </td>
     </tr>
 </table>
+</form>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Employee } from 'src/app/models/employee/employee';
@@ -14,7 +14,7 @@ import { EmployeeService } from '../../employee.service';
   styleUrls: ['./request-form.component.scss']
 })
 export class RequestFormComponent implements OnInit {
-  @Input() employeeid: string = '';
+  @Input() employee: Employee = new Employee();
   private _leaveRequest: LeaveRequest = new LeaveRequest();
   @Input() set leaverequest(value: LeaveRequest) {
     this._leaveRequest = new LeaveRequest(value);
@@ -24,6 +24,7 @@ export class RequestFormComponent implements OnInit {
     return this._leaveRequest;
   }
   @Input() team: Team = new Team();
+  @Output() empchange = new EventEmitter<Employee>();
   requestForm: FormGroup;
   startControl: FormControl = new FormControl(new Date(), [Validators.required]);
   endControl: FormControl = new FormControl(new Date(), [Validators.required]);
@@ -58,33 +59,37 @@ export class RequestFormComponent implements OnInit {
     this.endControl.setValue(this.leaverequest.end_date);
     this.basecode.setValue("V");
     this.days = new Array();
-    if (this.leaverequest.days && this.leaverequest._id !== 'new') {
+    if (this.leaverequest.days && this.leaverequest.days.length 
+        && this.leaverequest.id !== 'new') {
       this.leaverequest.days.sort((a,b) => a.compareTo(b));
-      let start = this.leaverequest.days[0].leave_date;
-      let end = this.leaverequest.days[this.leaverequest.days.length - 1].leave_date;
-      while (start.getDay() !== 0) {
-        start = new Date(start.getTime() - (24 * 3600000));
+      let startDay = new Date(this.leaverequest.days[0].leave_date);
+      console.log(startDay);
+      let endDay = new Date(this.leaverequest.days[
+        this.leaverequest.days.length - 1].leave_date);
+      while (startDay.getDay() !== 0) {
+        startDay = new Date(startDay.getTime() - (24 * 3600000));
       }
-      while (end.getDay() !== 6) {
-        end = new Date(end.getTime() + (24 * 3600000));
+      while (endDay.getDay() !== 6) {
+        endDay = new Date(endDay.getTime() + (24 * 3600000));
       }
-      while (start <= end) {
+      
+      while (startDay <= endDay) {
         let found = false;
         this.leaverequest.days.forEach(lv => {
-          if (lv.dateEqual(start)) {
+          if (lv.dateEqual(startDay)) {
             this.days.push(lv);
             found = true;
           }
         });
         if (!found) {
           let lv = new Leave();
-          lv.leave_date = new Date(start);
+          lv.leave_date = new Date(startDay);
           lv.code = "";
           lv.hours = 0;
-          lv.leave_request_id = this.leaverequest._id;
+          lv.leave_request_id = this.leaverequest.id;
           this.days.push(lv);
         }
-        start = new Date(start.getTime() + (24 * 3600000));
+        startDay = new Date(startDay.getTime() + (24 * 3600000));
       }
     }
   }
@@ -97,43 +102,55 @@ export class RequestFormComponent implements OnInit {
   }
 
   updateRequest() {
-    if (!this.leaverequest._id) { this.leaverequest._id = ""; }
-    this.empService.updateLeaveRequest(this.leaverequest._id, this.employeeid,
+    if (!this.leaverequest.id) { this.leaverequest.id = ""; }
+    this.empService.updateLeaveRequest(this.leaverequest.id, this.employee.id,
       this.startControl.value, this.endControl.value, this.basecode.value,
       this.newcomment.value).subscribe( lr => {
         this.leaverequest = new LeaveRequest(lr);
-        let s = this.authService.getSite();
-        let user = this.authService.getUser();
-        let employee = new Employee();
-        if (user) {
-          employee = new Employee(user)
-        }
-        if (s) {
-          let site = new Site(s);
-          let found = false;
-          if (site.employees) {
-            for (let i=0; i < site.employees?.length && !found; i++) {
-              if (site.employees[i].id === this.employeeid) {
-                let emp = new Employee(site.employees[i]);
-                for (let j=0; j < emp.leaveRequests.length && !found; j++) {
-                  if (emp.leaveRequests[j]._id === lr._id) {
-                    found = true;
-                    emp.leaveRequests[j] = new LeaveRequest(lr);
-                  }
-                }
-                if (!found) {
-                  emp.leaveRequests.push(new LeaveRequest(lr));
-                }
-                if (employee.id === this.employeeid) {
-                  this.authService.setUser(employee);
-                }
-                site.employees[i] = emp;
-              }
-            }
+        let found = false;
+        for (let i=0; i < this.employee.leaveRequests.length && !found; i++) {
+          if (this.employee.leaveRequests[i].id === lr.id) {
+            this.employee.leaveRequests[i] = new LeaveRequest(lr);
+            found = true;
           }
-          this.authService.setSite(site);
         }
+        if (!found) {
+          this.employee.leaveRequests.push(new LeaveRequest(lr));
+        }
+
+        let user = this.authService.getUser();
+        if (user) {
+          console.log(user);
+          if (user.id === this.employee.id) {
+            this.authService.setUser(this.employee);
+          }
+        }
+        this.authService.setUserInSite(this.employee);
+        this.empchange.emit(this.employee);
       });
     
+  }
+
+  changeRequest(req: LeaveRequest) {
+    let found = false;
+      for (let i=0; i < this.employee.leaveRequests.length && !found; i++) {
+        if (this.employee.leaveRequests[i].id === req.id) {
+          this.employee.leaveRequests[i] = new LeaveRequest(req);
+          found = true;
+        }
+      }
+      if (!found) {
+        this.employee.leaveRequests.push(new LeaveRequest(req));
+      }
+
+      let user = this.authService.getUser();
+      if (user) {
+        console.log(user);
+        if (user.id === this.employee.id) {
+          this.authService.setUser(this.employee);
+        }
+      }
+      this.authService.setUserInSite(this.employee);
+      this.empchange.emit(this.employee);
   }
 }

@@ -61,7 +61,11 @@ export class RequestButtonsComponent implements OnInit {
     }
   }
 
-  setRequestDisplay(value: string) {
-    this.showrequest.emit(value);
+  setRequestDisplay(value: LeaveRequest | null) {
+    if (value) {
+      this.showrequest.emit(value.id);
+    } else {
+      this.showrequest.emit("new");
+    }
   }
 }

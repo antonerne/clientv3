@@ -2,20 +2,20 @@ import { IComparable } from "../../utilities/comparable";
 import { Leave, Statuses } from "./leave";
 
 export interface ILeaveRequestComment {
-    id?: string | undefined;
+    id: string;
     comment_date: Date;
     comment: string;
 }
 
 export class LeaveRequestComment 
     implements ILeaveRequestComment, IComparable<LeaveRequestComment> {
-    public id?: string | undefined;
+    public id: string;
     public comment_date: Date;
     public comment: string;
 
     constructor(other?: ILeaveRequestComment) {
         this.id = (other && other.id) ? other.id : "";
-        this.comment_date = (other) ? other.comment_date : new Date();
+        this.comment_date = (other) ? new Date(other.comment_date) : new Date();
         this.comment = (other) ? other.comment : "";
     }
 
@@ -26,7 +26,7 @@ export class LeaveRequestComment
 }
 
 export interface ILeaveRequest {
-    _id?: string | undefined;
+    id: string;
     employee: string;
     site: string;
     start_date: Date;
@@ -41,7 +41,7 @@ export interface ILeaveRequest {
 }
 
 export class LeaveRequest implements ILeaveRequest, IComparable<LeaveRequest> {
-    public _id?: string | undefined;
+    public id: string;
     public employee: string;
     public site: string;
     public start_date: Date;
@@ -55,14 +55,15 @@ export class LeaveRequest implements ILeaveRequest, IComparable<LeaveRequest> {
     public approvedBy?: string | undefined;
 
     constructor(other?: ILeaveRequest) {
-        this._id = (other && other._id) ? other._id : undefined;
+        this.id = (other && other.id) ? other.id : "";
         this.site = (other) ? other.site : "";
-        this.start_date = (other) ? other.start_date : new Date();
-        this.end_date = (other) ? other.end_date : new Date();
+        this.start_date = (other) ? new Date(other.start_date) : new Date();
+        this.end_date = (other) ? new Date(other.end_date) : new Date();
         this.createdOn = (other) ? new Date(other.createdOn) : new Date(0)
         this.deleteRequest = (other && other.deleteRequest) 
-            ? other.deleteRequest : undefined;
-        this.updatedOn = (other) ? other.updatedOn : new Date(0);
+            ? new Date(other.deleteRequest) : undefined;
+        this.updatedOn = (other && other.updatedOn) 
+            ? new Date(other.updatedOn) : new Date(0);
         this.status = (other) ? other.status : Statuses.REQUESTED;
         this.comments = [];
         if (other && other.comments) {

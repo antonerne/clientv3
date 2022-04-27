@@ -45,21 +45,22 @@ style="height: 665px;">
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5">
-                <button mat-raised-button *ngIf="leaverequest._id === 'new'"
+                <button mat-raised-button *ngIf="leaverequest.id === 'new'"
                     color="primary" (click)="updateRequest()">ADD</button>
-                <button mat-raised-button *ngIf="leaverequest._id !== 'new'"
+                <button mat-raised-button *ngIf="leaverequest.id !== 'new'"
                     color="accent" (click)="updateRequest()">UPDATE</button>
-                <button mat-raised-button *ngIf="leaverequest._id !== 'new'"
+                <button mat-raised-button *ngIf="leaverequest.id !== 'new'"
                     color="warn">DELETE</button>
             </div>
         </form>
-        <div class="daysLabel" *ngIf="leaverequest._id != 'new'">
+        <div class="daysLabel" *ngIf="leaverequest.id != 'new'">
             Leave Day Assignments</div>
-        <div class="days" *ngIf="leaverequest._id !== 'new'">
-            <app-request-form-period [employeeid]="employeeid"
+        <div class="days" *ngIf="leaverequest.id !== 'new'">
+            <app-request-form-period [employeeid]="employee.id"
                 [startdate]="leaverequest.start_date" 
                 [enddate]="leaverequest.end_date"
-                [days]="days"></app-request-form-period>
+                [days]="days"
+                (changePeriod)="changeRequest($event)"></app-request-form-period>
         </div>
     </div>
 </div>
