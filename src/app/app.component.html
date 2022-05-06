@@ -19,7 +19,7 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <ng-container *ngFor="let item of head.menus">
-            <button mat-raised-button color="accent" class="menu-buttons" 
+            <button mat-raised-button color="primary" class="menu-buttons" 
               [routerLink]="item.link">
               {{item.title}}
             </button>
@@ -32,7 +32,7 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<mat-toolbar color="primary" class="toolbarBottom">
+<mat-toolbar class="toolbarBottom">
   <h5 style="font-size: 10pt;">{{authService.statusMessage}}</h5>
   <span class="flex-spacer"></span>
   <mat-progress-bar *ngIf="authService.showProgress" 
