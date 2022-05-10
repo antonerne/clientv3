@@ -1,7 +1,7 @@
 <table>
     <tr *ngFor="let week of this.weeks">
         <app-request-form-week [employeeid]="employeeid" [startdate]="startdate"
-            [enddate]="enddate" [dates]="week"
+            [enddate]="enddate" [dates]="week" [requestid]="requestid"
             (changeWeek)="changeLeaveRequest($event)"></app-request-form-week>
     </tr>
 </table>

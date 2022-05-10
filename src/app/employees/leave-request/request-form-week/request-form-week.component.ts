@@ -9,6 +9,7 @@ import { LeaveRequest } from 'src/app/models/employee/leaves/leaveRequest';
 })
 export class RequestFormWeekComponent implements OnInit {
   private _dates: Leave[] = [];
+  @Input() requestid: string = "";
   @Input() employeeid: string = "";
   @Input() startdate: Date = new Date();
   @Input() enddate: Date = new Date();

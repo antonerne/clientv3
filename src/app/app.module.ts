@@ -12,6 +12,7 @@ import { AuthHttpInterceptor } from './utilities/auth-http-interceptor';
 import { AuthModule } from './auth/auth.module';
 import { EmployeesModule } from './employees/employees.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SchedulesModule } from './schedules/schedules.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HttpClientModule,
     EmployeesModule,
     AuthModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SchedulesModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

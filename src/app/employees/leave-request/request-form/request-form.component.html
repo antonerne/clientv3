@@ -57,6 +57,7 @@ style="height: 665px;">
             Leave Day Assignments</div>
         <div class="days" *ngIf="leaverequest.id !== 'new'">
             <app-request-form-period [employeeid]="employee.id"
+                [requestid]="leaverequest.id"
                 [startdate]="leaverequest.start_date" 
                 [enddate]="leaverequest.end_date"
                 [days]="days"

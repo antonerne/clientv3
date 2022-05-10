@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Leave } from 'src/app/models/employee/leaves/leave';
 import { LeaveRequest } from 'src/app/models/employee/leaves/leaveRequest';
 import { Team } from 'src/app/models/team/team';
+import { EmployeeService } from '../../employee.service';
 
 @Component({
   selector: 'app-request-form-days',
@@ -14,6 +15,7 @@ export class RequestFormDaysComponent implements OnInit {
   private _leaveday: Leave = new Leave();
   private _startdate: Date = new Date();
   private _enddate: Date = new Date();
+  @Input() requestid: string = "";
   @Input() employeeid: string = "";
   @Input() team: Team = new Team();
   @Input() set startdate(value: Date) {
@@ -47,6 +49,7 @@ export class RequestFormDaysComponent implements OnInit {
     "10", "11", "12");
 
   constructor(private fb: FormBuilder,
+    private empService: EmployeeService,
     private authService: AuthService) { 
     this.dayForm = this.fb.group({
       leaveCode: this.leaveCode,
@@ -80,4 +83,28 @@ export class RequestFormDaysComponent implements OnInit {
     this.leaveHours.setValue(this.leaveday.hours);
   }
 
+  updateLeaveRequestDay(field: string) {
+    let value: string = "";
+    let process = false;
+    switch (field.toLowerCase()) {
+      case "code":
+        value = this.leaveCode.value;
+        field = "code";
+        process = true;
+        break;
+      case "hours":
+        value = Number(this.leaveHours.value).toString();
+        field = "hours";
+        process = true;
+        break;
+    }
+    console.log(field + " = " + value);
+    if (process && this.requestid !== "" && this.employeeid !== "") {
+      this.empService.updateLeaveRequestDay(this.requestid, 
+        this.employeeid, this.leaveday.leave_date, field, value).subscribe(lr => {
+          let lvReq = new LeaveRequest(lr);
+          this.changeDay.emit(lvReq);
+        });
+    }
+  }
 }

@@ -1,5 +1,5 @@
 <td *ngFor="let date of dates">
     <app-request-form-days [leaveday]="date" [employeeid]="employeeid"
-        [startdate]="startdate" [enddate]="enddate"
+        [startdate]="startdate" [enddate]="enddate" [requestid]="requestid"
         (changeDay)="changeLeaveRequest($event)"></app-request-form-days>
 </td>

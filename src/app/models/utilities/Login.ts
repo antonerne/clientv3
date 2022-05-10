@@ -1,14 +1,13 @@
 import { IEmployee } from "../employee/employee";
 import { ISite } from "../site/site";
 import { ITeam } from "../team/team";
+import { Token } from "./authenticateResponse";
 
 export interface LoginResponse {
     team: ITeam;
     site: ISite;
     user: IEmployee;
-    mustchange: boolean;
-    token: string;
-    expires: Date;
+    token: Token;
 }
 
 export interface Message {

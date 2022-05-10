@@ -142,6 +142,7 @@ export class RequestFormComponent implements OnInit {
       if (!found) {
         this.employee.leaveRequests.push(new LeaveRequest(req));
       }
+      this.leaverequest = new LeaveRequest(req);
 
       let user = this.authService.getUser();
       if (user) {

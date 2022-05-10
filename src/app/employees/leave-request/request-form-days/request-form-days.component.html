@@ -6,7 +6,8 @@
     </tr>
     <tr>
         <td colspan="2" class="code">
-            <select matNativeControl formControlName="leaveCode">
+            <select matNativeControl formControlName="leaveCode"
+                (change)="updateLeaveRequestDay('code')">
                 <option value=""></option>
                 <ng-container *ngFor="let dc of team.displayCodes">
                     <option *ngIf="dc.is_leave" [value]="dc.code">{{dc.code}}</option>
@@ -16,7 +17,8 @@
     </tr>
     <tr>
         <td colspan="2" class="workcenter">
-            <select matNativeControl formControlName="leaveHours">
+            <select matNativeControl formControlName="leaveHours"
+                (change)="updateLeaveRequestDay('hours')">
                 <option *ngFor="let v of aHours, index as i" [value]="v">
                     {{sHours[i]}}
                 </option>

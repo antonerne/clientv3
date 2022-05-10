@@ -1,9 +1,16 @@
+import { Employee } from "../employee/employee";
+import { Site } from "../site/site";
+import { Team } from "../team/team";
+
 export interface LoginResponse {
-    status: number;
-    message: string;
+    team: Team;
+    site: Site;
+    user: Employee;
+    token: Token;
 }
 
 export interface Token {
-    userid: string;
-    email: string;
+    id: string;
+    expires: Date;
+    tokenString: string;
 }

@@ -99,12 +99,12 @@ export class AuthService extends CacheService {
     return this.http.post<LoginResponse>(address, 
       {"email": email, "password":password})
       .pipe(map(resp => {
-        this.setItem('jwt', resp.token);
+        this.setItem('jwt', resp.token.tokenString);
         this.isAuthenticated = true;
         this.setItem('team', resp.team);
         this.setItem('site', resp.site);
         this.setItem('user', resp.user);
-        this.setItem('expires', resp.expires);
+        this.setItem('expires', new Date(resp.user.creds.expires));
         this.mustChange = resp.user.creds.must_change;
         this.showProgress = false;
       }));
