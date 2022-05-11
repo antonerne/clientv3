@@ -44,7 +44,7 @@ export class EmployeeService extends CacheService {
     let team = this.getItem<Team>('team');
     let site = this.getItem<Site>('site');
     if (team && site) {
-      let address = `/api/v2/Employees/site/${team.id}/${site.id}`;
+      let address = `/api/v2/Employees/site/${team.id}/${site.code}`;
       return this.http.get<Employee[]>(address);
     }
     return of([]);

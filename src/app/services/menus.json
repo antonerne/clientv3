@@ -8,7 +8,7 @@
             {"title": "Leaves", "link": "/employee/leaves", "roles": [ "employee"]},
             {"title": "Leave Request", "link": "/employee/leaverequest", "roles": [ "employee"]}
         ]},{"title": "Site Schedule", "menus": [
-            {"title": "Schedule", "link": "/home", "roles": [ "employee"]},
+            {"title": "Schedule", "link": "/employee/siteschedule", "roles": [ "employee"]},
             {"title": "Coverage", "link": "/home", 
                 "roles": [ "Site Scheduler", "Shift Supervisor", 
                     "Section Leader", "Site Leader"]}

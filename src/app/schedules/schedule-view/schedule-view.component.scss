@@ -1,0 +1,73 @@
+.top-div {
+    margin-top: 32px;
+}
+
+div.direction {
+    display: flex;
+    height: 25px;
+    width: 99px;
+    background-color: #3366ff;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px white;
+    margin: 0;
+    padding: 0;
+}
+
+div.month {
+    display: flex;
+    height: 25px;
+    background-color: #3366ff;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px white;
+    margin: 0;
+    padding: 0;
+}
+
+div.workcenter {
+    display: flex;
+    height: 25px;
+    background-color: #e6ac00;
+    color: black;
+    font-size: 11pt;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px white;
+    margin: 0;
+    padding: 0;
+}
+
+div.day {
+    display: flex;
+    height: 25px;
+    width: 25px;
+    font-size: 10pt;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px black;
+    margin: 0;
+    padding: 0;
+}
+
+div.name {
+    display: flex;
+    height: 25px;
+    width: 200px;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px black;
+}

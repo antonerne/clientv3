@@ -24,7 +24,7 @@ export class Site implements ISite, IComparable<Site> {
     public utc_difference: number;
     public work_codes?: WorkCode[] | undefined;
     public labor_codes?: SiteLaborCode[] | undefined;
-    public work_centers?: Workcenter[] | undefined;
+    public workcenters?: Workcenter[] | undefined;
     public employees?: Employee[] | undefined;
     public date_created?: Date;
     public last_updated?: Date;
@@ -42,11 +42,11 @@ export class Site implements ISite, IComparable<Site> {
                 }
             });
         }
-        this.work_centers = [];
-        if (other && other.work_centers ) {
-            other.work_centers.forEach(wc => {
-                if (this.work_centers) {
-                    this.work_centers.push(new Workcenter(wc));
+        this.workcenters = [];
+        if (other && other.workcenters ) {
+            other.workcenters.forEach(wc => {
+                if (this.workcenters) {
+                    this.workcenters.push(new Workcenter(wc));
                 }
             });
         }

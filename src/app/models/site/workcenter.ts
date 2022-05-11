@@ -15,6 +15,7 @@ export class Position implements IPosition, IComparable<Position> {
     public title: string;
     public is_displayed: boolean;
     public display_order: number;
+    public employeeids: string[] | undefined;
     public employees?: Employee[] | undefined;
 
     constructor(other?: Position) {
@@ -22,6 +23,12 @@ export class Position implements IPosition, IComparable<Position> {
         this.title = (other) ? other.title : "";
         this.is_displayed = (other) ? other.is_displayed : false;
         this.display_order = (other) ? other.display_order : 0;
+        this.employeeids = new Array();
+        if (other && other.employeeids) {
+            for (let eid of other.employeeids) {
+                this.employeeids.push(eid);
+            }
+        }
         this.employees = new Array();
         if (other && other.employees) {
             for (let emp of other.employees) {

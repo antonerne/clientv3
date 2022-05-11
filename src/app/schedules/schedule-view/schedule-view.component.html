@@ -1,1 +1,47 @@
-<p>schedule-view works!</p>
+<div fxLayout="row" fxLayoutAlign="center" class="top-div">
+    <mat-card fxFlex="1050px">
+        <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="0">
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="0">
+                <div class="direction">&lt;&lt;</div>
+                <div class="direction">&lt;</div>
+                <div class="month" [style]="monthCss">{{getMonth()}}</div>
+                <div class="direction">&gt;</div>
+                <div class="direction">&gt;&gt;</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="0">
+                <div class="name">Employee Name</div>
+                <ng-container *ngFor="let day of daysOfMonth">
+                    <div class="day" [style]="getDateCss(day)">{{day}}</div>
+                </ng-container>
+            </div>
+            <ng-container *ngFor="let wc of site?.workcenters">
+                <div class="workcenter" [style]="workcenterCss">
+                    {{wc.title.toUpperCase()}}</div>
+                <ng-container *ngIf="wc.positions && wc.positions.length > 0">
+                    <ng-container *ngFor="let pos of wc.positions">
+                        <ng-container *ngFor="let emp of pos.employees">
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="0">
+                                <div class="name">{{emp.name.lastFirst(false)}}</div>
+                                <ng-container *ngFor="let day of daysOfMonth">
+                                    <div class="day" 
+                                    [style]="getWorkCodeCss(emp, day)">
+                                    {{getWorkCode(emp, day)}}</div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngFor="let emp of wc.employees">
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="0">
+                        <div class="name">{{emp.name.lastFirst(false)}}</div>
+                        <ng-container *ngFor="let day of daysOfMonth">
+                            <div class="day" 
+                            [style]="getWorkCodeCss(emp, day)">
+                            {{getWorkCode(emp, day)}}</div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </mat-card>
+</div>
